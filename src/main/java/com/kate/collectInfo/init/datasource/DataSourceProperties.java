@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * 获取数据库的连接信息，在application.properties中配置，并指定特定的前缀
  *
  */
-@Component
-@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
+/*@Component
+@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)*/
 public class DataSourceProperties implements BeanClassLoaderAware {
 
 	public static final String PREFIX = "jdbc.datasource";

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * 获取数据库的连接信息，在application.properties中配置，并指定特定的前缀
  *
  */
-@Component
-@ConfigurationProperties(prefix = MqDataSourceProperties.PREFIX)
+/*@Component
+@ConfigurationProperties(prefix = MqDataSourceProperties.PREFIX)*/
 public class MqDataSourceProperties implements BeanClassLoaderAware{
 	
 	public static final String PREFIX = "activeMQ";

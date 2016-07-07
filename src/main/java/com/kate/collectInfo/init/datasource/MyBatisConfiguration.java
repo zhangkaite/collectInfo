@@ -22,8 +22,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * myBatis config
  */
 
-@Configuration
-@EnableAutoConfiguration
+/*@Configuration
+@EnableAutoConfiguration*/
 public class MyBatisConfiguration {
 
 	private final Logger log = LogManager.getLogger(MyBatisConfiguration.class);

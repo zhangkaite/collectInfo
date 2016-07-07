@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.kate.collectInfo.init.datasource.MqDataSourceProperties;
 
-@Configuration
-@EnableAutoConfiguration
+/*@Configuration
+@EnableAutoConfiguration*/
 public class ActiveMqConfiguration {
 
 	@Autowired

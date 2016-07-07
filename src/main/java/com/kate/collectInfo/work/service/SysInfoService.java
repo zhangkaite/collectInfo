@@ -61,7 +61,7 @@ public class SysInfoService {
 	}
 
 	// c)CPU的用户使用量、系统使用剩余量、总的剩余量、总的使用占用量等（单位：100%）
-	public List<Map<String, String>> cpuPerc() {
+	public static List<Map<String, String>> cpuPerc() {
 		List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
 
 		Sigar sigar = new Sigar();
@@ -80,7 +80,7 @@ public class SysInfoService {
 		return dataList;
 	}
 
-	private Map<String, String> printCpuPerc(CpuPerc cpu) {
+	private static Map<String, String> printCpuPerc(CpuPerc cpu) {
 		Map<String, String> dataMap = new HashMap<String, String>();
 		dataMap.put("User", CpuPerc.format(cpu.getUser()));
 		dataMap.put("Sys", CpuPerc.format(cpu.getSys()));
