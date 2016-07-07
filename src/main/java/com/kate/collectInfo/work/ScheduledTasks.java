@@ -13,13 +13,14 @@ public class ScheduledTasks {
 	public static final Logger logger = LogManager.getLogger(ScheduledTasks.class);
 	@Autowired
 	private CollectWinInfoTask collectWinInfoTask;
-	
-	@Scheduled(cron = "*/40 * * * * *")
+
+	@Scheduled(cron = "*/5 * * * * *")
 	public void sendHttpWinInfo() {
 		try {
-			collectWinInfoTask.excute(null);
+			// collectWinInfoTask.excute(null);
+			// System.out.println("work调度成功");
 		} catch (Exception e) {
-			logger.error("collectWinInfoTask work调用失败，失败的原因是:",e);
+			logger.error("collectWinInfoTask work调用失败，失败的原因是:", e);
 		}
 	}
 }

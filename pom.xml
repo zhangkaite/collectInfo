@@ -57,6 +57,10 @@
 			<version>1.9.13</version>
 		</dependency>
 
+		<groupId>org.springframework</groupId>
+		<artifactId>gs-scheduling-tasks</artifactId>
+		<version>0.1.0</version>
+
 		<!-- mysql -->
 		<dependency>
 			<groupId>org.springframework</groupId>
