@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%-5level %d{yyyy-MM-dd HH:mm:ss }[%class{36}]  %msg%n" />
+		</Console>
+		<RollingFile name="RollingFile" fileName="sdms_logs/sdmsAll.log"
+			filePattern="log/$${date:yyyy-MM}/sdmsAll-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="250MB" />
+		</RollingFile>
+		
+
+		<RollingFile name="serviceLogFile" fileName="sdms_logs/service.log"
+			filePattern="sdmss/$${date:yyyy-MM}/sdms_service%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%-5level %d{yyyy-MM-dd HH:mm:ss }[%class{36}] %msg%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+			
+		</RollingFile>
+			<RollingFile name="webLogFile" fileName="sdms_logs/web.log"
+			filePattern="sdmss/$${date:yyyy-MM}/sdms_web%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%-5level %d{yyyy-MM-dd HH:mm:ss }[%class{36}] %msg%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="daoLogFile" fileName="sdms_logs/dao.log"
+			filePattern="sdmss/$${date:yyyy-MM}/sdms_dao%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%-5level %d{yyyy-MM-dd HH:mm:ss }[%class{36}] %msg%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+		</RollingFile>
+		
+	</appenders>
+	
+	<loggers>
+		<logger name="com.ttmv.datacenter.sdms.service"  level="info" additivity="true">
+			<appender-ref ref="serviceLogFile" />
+		</logger> 
+		
+		<logger name="com.ttmv.datacenter.sdms.web"  level="info" additivity="true">
+			<appender-ref ref="webLogFile" />
+		</logger> 
+		
+		<logger name="com.ttmv.datacenter.sdms.dao"  level="info" additivity="true">
+			<appender-ref ref="daoLogFile" />
+		</logger> 
+		<logger name="com.ttmv.datacenter.sdms.listeners"  level="info" additivity="true">
+			<appender-ref ref="serviceLogFile" />
+		</logger> 
+		
+
+		<root level="info">
+			<appender-ref ref="RollingFile" />
+			<appender-ref ref="Console" />
+		</root>
+	</loggers>
+</configuration>
