@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import com.kate.Component.sentry.handle.QuickSentry;
 import com.kate.collectInfo.tools.JsonUtil;
@@ -18,14 +17,13 @@ import com.kate.collectInfo.tools.JsonUtil;
  * @author kate
  *
  */
-@Service
+/*@Service*/
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class CollectWinInfoTask {
-
+public class HttpSendInfoTask {
 	@Autowired
 	@Qualifier("sendSysInfoHttpRes")
 	private QuickSentry sendSysInfoHttpRes;
-	public static final Logger logger = LogManager.getLogger(CollectWinInfoTask.class);
+	public static final Logger logger = LogManager.getLogger(HttpSendInfoTask.class);
 
 	/**
 	 * http请求，回调数据分析系统，获取主播活动吊牌信息详情
@@ -44,18 +42,11 @@ public class CollectWinInfoTask {
 	}
 
 	/**
-	 * 将请求参数封装成Map
-	 * 
-	 * @param userID
-	 *            主播ID
-	 * @param roomID
-	 *            直播间ID
-	 * @param activityID
-	 *            活动ID
+	 * 将采集到的数据封装成Map推送给server服务器
+	 * @param reqMap
 	 * @return
 	 * @throws Exception
 	 */
-
 	private String getReqJson(Map reqMap) throws Exception {
 		String userID = reqMap.get("userID").toString();
 		String roomID = reqMap.get("roomID").toString();

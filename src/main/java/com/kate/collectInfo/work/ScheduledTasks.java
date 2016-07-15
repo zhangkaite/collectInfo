@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.kate.collectInfo.work.task.CollectWinInfoTask;
+import com.kate.collectInfo.work.task.CollectCpuInfoServiceTask;
+import com.kate.collectInfo.work.task.CollectMemInfoServiceTask;
 
 @Component
 public class ScheduledTasks {
 	public static final Logger logger = LogManager.getLogger(ScheduledTasks.class);
 	@Autowired
-	private CollectWinInfoTask collectWinInfoTask;
-
+	private CollectCpuInfoServiceTask collectCpuInfoServiceTask;
+   @Autowired
+	private CollectMemInfoServiceTask collectMemInfoServiceTask;
 	@Scheduled(cron = "*/5 * * * * *")
 	public void sendHttpWinInfo() {
 		try {
+			collectCpuInfoServiceTask.addCpuInfo();
+			collectMemInfoServiceTask.addMemInfo();
 			// collectWinInfoTask.excute(null);
 			// System.out.println("work调度成功");
 		} catch (Exception e) {

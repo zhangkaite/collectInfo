@@ -100,27 +100,27 @@ public class SysInfoService {
 	}
 
 	// 2.内存资源信息
-	public void getPhysicalMemory() {
+	public static void getPhysicalMemory() {
 		// a)物理内存信息
 		Sigar sigar = new Sigar();
 		Mem mem;
 		try {
 			mem = sigar.getMem();
 			// 内存总量
-			System.out.println("Total = " + mem.getTotal() / 1024L + "K av");
+			System.out.println("Total = " + mem.getTotal() / 1024L + "K");
 			// 当前内存使用量
-			System.out.println("Used = " + mem.getUsed() / 1024L + "K used");
+			System.out.println("Used = " + mem.getUsed() / 1024L + "K");
 			// 当前内存剩余量
-			System.out.println("Free = " + mem.getFree() / 1024L + "K free");
+			System.out.println("Free = " + mem.getFree() / 1024L + "K");
 
 			// b)系统页面文件交换区信息
 			Swap swap = sigar.getSwap();
 			// 交换区总量
-			System.out.println("Total = " + swap.getTotal() / 1024L + "K av");
+			System.out.println("Total = " + swap.getTotal() / 1024L + "K");
 			// 当前交换区使用量
-			System.out.println("Used = " + swap.getUsed() / 1024L + "K used");
+			System.out.println("Used = " + swap.getUsed() / 1024L + "K");
 			// 当前交换区剩余量
-			System.out.println("Free = " + swap.getFree() / 1024L + "K free");
+			System.out.println("Free = " + swap.getFree() / 1024L + "K");
 		} catch (SigarException e) {
 			e.printStackTrace();
 		}
@@ -129,7 +129,7 @@ public class SysInfoService {
 	// 3.操作系统信息
 
 	// a)取到当前操作系统的名称：
-	public String getPlatformName() {
+	public static String getPlatformName() {
 		String hostname = "";
 		try {
 			hostname = InetAddress.getLocalHost().getHostName();
@@ -147,7 +147,7 @@ public class SysInfoService {
 	}
 
 	// b)取当前操作系统的信息
-	public void testGetOSInfo() {
+	public static void testGetOSInfo() {
 		OperatingSystem OS = OperatingSystem.getInstance();
 		// 操作系统内核类型如： 386、486、586等x86
 		System.out.println("OS.getArch() = " + OS.getArch());
@@ -195,7 +195,7 @@ public class SysInfoService {
 	// 4.资源信息（主要是硬盘）
 
 	// a)取硬盘已有的分区及其详细信息（通过sigar.getFileSystemList()来获得FileSystem列表对象，然后对其进行编历）：
-	public List<Map<String, String>> FileSystemInfo() throws Exception {
+	public static List<Map<String, String>> FileSystemInfo() throws Exception {
 		Sigar sigar = new Sigar();
 		FileSystem fslist[] = sigar.getFileSystemList();
 		List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
@@ -228,15 +228,6 @@ public class SysInfoService {
 				dataMap.put("Used", usage.getUsed() / 1024 + "MB");
 				double usePercent = usage.getUsePercent() * 100D;
 				dataMap.put("Usage", usePercent + "%");
-				/*
-				 * // 文件系统总大小 System.out.println(" Total = " + usage.getTotal()
-				 * + "KB"); // 文件系统剩余大小 System.out.println(" Free = " +
-				 * usage.getFree() + "KB"); // 文件系统可用大小 System.out.println(
-				 * " Avail = " + usage.getAvail() + "KB"); // 文件系统已经使用量
-				 * System.out.println(" Used = " + usage.getUsed() + "KB"); //
-				 * 文件系统资源的利用率 System.out.println(" Usage = " + usePercent +
-				 * "%");
-				 */
 				break;
 			case 3:// TYPE_NETWORK ：网络
 				break;
@@ -274,7 +265,7 @@ public class SysInfoService {
 	}
 
 	// b)取到当前机器的IP地址
-	public String getDefaultIpAddress() {
+	public static String getDefaultIpAddress() {
 		String address = null;
 		try {
 			address = InetAddress.getLocalHost().getHostAddress();
@@ -298,7 +289,7 @@ public class SysInfoService {
 	}
 
 	// c)取到当前机器的MAC地址
-	public String getMAC() {
+	public static String getMAC() {
 		Sigar sigar = null;
 		try {
 			sigar = new Sigar();
@@ -394,9 +385,9 @@ public class SysInfoService {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		SysInfoService sysInfoService = new SysInfoService();
 		sysInfoService.testWho();
-	}
+	}*/
 
 }

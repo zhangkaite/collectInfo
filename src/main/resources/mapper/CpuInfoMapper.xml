@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.CpuInfoMapper">
+	<select id="selectCpuInfoOne" resultType="com.kate.collectInfo.service.entity.CpuInfo">
+		select * from cpuInfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and cpuNo=#{cpuNo,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertCpuInfoSelective" parameterType="com.kate.collectInfo.service.entity.CpuInfo">
+		insert into cpuInfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="cpuNo != null">
+				cpuNo,
+			</if>
+			<if test="cpuMhz != null">
+				cpuMhz,
+			</if>
+			<if test="cpuVendor !=null">
+				cpuVendor,
+			</if>
+			<if test="cpuModel !=null">
+				cpuModel,
+			</if>
+			<if test="cpuCacheSize !=null">
+				cpuCacheSize,
+			</if>
+			<if test="cpuTotalCores !=null">
+				cpuTotalCores,
+			</if>
+			<if test="cpuTotalSockets !=null">
+				cpuTotalSockets,
+			</if>
+			<if test="cpuCoresPerSocket !=null">
+				cpuCoresPerSocket,
+			</if>
+			<if test="cpuUser !=null">
+				cpuUser,
+			</if>
+
+			<if test="cpuSys !=null">
+				cpuSys,
+			</if>
+			<if test="cpuWait !=null">
+				cpuWait,
+			</if>
+			<if test="cpuNice !=null">
+				cpuNice,
+			</if>
+			<if test="cpuIdle !=null">
+				cpuIdle,
+			</if>
+			<if test="cpuTotal !=null">
+				cpuTotal,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuNo != null">
+				#{cpuNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuMhz != null">
+				#{cpuMhz,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuVendor !=null">
+				#{cpuVendor,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuModel != null">
+				#{cpuModel,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuCacheSize != null">
+				#{cpuCacheSize,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotalCores != null">
+				#{cpuTotalCores,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotalSockets !=null">
+				#{cpuTotalSockets,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuCoresPerSocket != null">
+				#{cpuCoresPerSocket,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuUser != null">
+				#{cpuUser,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuSys != null">
+				#{cpuSys,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuWait !=null">
+				#{cpuWait,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuNice != null">
+				#{cpuNice,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuIdle != null">
+				#{cpuIdle,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotal !=null">
+				#{cpuTotal,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateCpuInfoByPrimaryKey" parameterType="com.kate.collectInfo.service.entity.CpuInfo">
+		update cpuInfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuNo != null">
+				cpuNo=#{cpuNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuMhz != null">
+				cpuMhz=#{cpuMhz,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuVendor !=null">
+				cpuVendor=#{cpuVendor,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuModel != null">
+				cpuModel=#{cpuModel,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuCacheSize != null">
+				cpuCacheSize=#{cpuCacheSize,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotalCores != null">
+				cpuTotalCores=#{cpuTotalCores,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotalSockets !=null">
+				cpuTotalSockets=#{cpuTotalSockets,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuCoresPerSocket != null">
+				cpuCoresPerSocket=#{cpuCoresPerSocket,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuUser != null">
+				cpuUser=#{cpuUser,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuSys != null">
+				cpuSys=#{cpuSys,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuWait !=null">
+				cpuWait=#{cpuWait,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuNice != null">
+				cpuNice=#{cpuNice,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuIdle != null">
+				cpuIdle=#{cpuIdle,jdbcType=VARCHAR},
+			</if>
+			<if test="cpuTotal !=null">
+				cpuTotal=#{cpuTotal,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

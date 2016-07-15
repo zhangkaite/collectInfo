@@ -1,4 +1,4 @@
-package com.kate.collectInfo;
+package com.kate;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

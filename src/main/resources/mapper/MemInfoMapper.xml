@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.MenInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.MemInfo">
+		select * from meminfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} 
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.MemInfo">
+		insert into meminfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="memtotals != null">
+				memtotals,
+			</if>
+			<if test="memfree != null">
+				memfree,
+			</if>
+			<if test="memused !=null">
+				memused,
+			</if>
+			<if test="swaptotals !=null">
+				swaptotals,
+			</if>
+			<if test="swapused !=null">
+				swapused,
+			</if>
+			<if test="swapfree !=null">
+				swapfree,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="memtotals != null">
+				#{memtotals,jdbcType=VARCHAR},
+			</if>
+			<if test="memfree != null">
+				#{memfree,jdbcType=VARCHAR},
+			</if>
+			<if test="memused !=null">
+				#{memused,jdbcType=VARCHAR},
+			</if>
+			<if test="swaptotals != null">
+				#{swaptotals,jdbcType=VARCHAR},
+			</if>
+			<if test="swapused != null">
+				#{swapused,jdbcType=VARCHAR},
+			</if>
+			<if test="swapfree != null">
+				#{swapfree,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.CpuInfo">
+		update meminfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+		<if test="memtotals != null">
+				memtotals=#{memtotals,jdbcType=VARCHAR},
+			</if>
+			<if test="memfree != null">
+				memfree=#{memfree,jdbcType=VARCHAR},
+			</if>
+			<if test="memused !=null">
+				memused=#{memused,jdbcType=VARCHAR},
+			</if>
+			<if test="swaptotals != null">
+				swaptotals=#{swaptotals,jdbcType=VARCHAR},
+			</if>
+			<if test="swapused != null">
+				swapused=#{swapused,jdbcType=VARCHAR},
+			</if>
+			<if test="swapfree != null">
+				swapfree=#{swapfree,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

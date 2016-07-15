@@ -7,14 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -22,8 +19,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * myBatis config
  */
 
-/*@Configuration
-@EnableAutoConfiguration*/
+@Configuration
+@EnableAutoConfiguration
 public class MyBatisConfiguration {
 
 	private final Logger log = LogManager.getLogger(MyBatisConfiguration.class);
@@ -32,8 +29,7 @@ public class MyBatisConfiguration {
 	public DataSourceProperties properties;
 
 	@Autowired
-	@Qualifier("sdmsComboPooledDataSource")
-	private ComboPooledDataSource sdmsComboPooledDataSource;
+	private ComboPooledDataSource comboPooledDataSource;
 
 
 	/**
@@ -42,7 +38,7 @@ public class MyBatisConfiguration {
 	 * @return
 	 */
 
-	@Bean(name="sdmsComboPooledDataSource")
+	@Bean(name="comboPooledDataSource")
 	public ComboPooledDataSource comboPooledDataSource() {
 		try {
 			ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
@@ -69,8 +65,8 @@ public class MyBatisConfiguration {
 		try {
 			SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 			PathMatchingResourcePatternResolver p = new PathMatchingResourcePatternResolver();
-			Resource[] resources = p.getResources("classpath*:/mapper/*.xml");
-			bean.setDataSource(sdmsComboPooledDataSource);
+			Resource[] resources = p.getResources("classpath:/mapper/*.xml");
+			bean.setDataSource(comboPooledDataSource);
 			bean.setMapperLocations(resources);
 			sqlSessionFactory = bean.getObject();
 		} catch (Exception e) {
@@ -80,9 +76,9 @@ public class MyBatisConfiguration {
 		return sqlSessionFactory;
 	}
 
-	@Bean
+	/*@Bean
 	public PlatformTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(sdmsComboPooledDataSource);
-	}
+		return new DataSourceTransactionManager(comboPooledDataSource);
+	}*/
 
 }

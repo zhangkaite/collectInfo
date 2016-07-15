@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * 获取数据库的连接信息，在application.properties中配置，并指定特定的前缀
  *
  */
-/*@Component
-@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)*/
+@Component
+@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
 public class DataSourceProperties implements BeanClassLoaderAware {
 
 	public static final String PREFIX = "jdbc.datasource";
@@ -18,44 +18,7 @@ public class DataSourceProperties implements BeanClassLoaderAware {
 	private String password;
 	private String driverClassName;
 	private ClassLoader classLoader;
-
-	private String dcurl;
-	private String dcusername;
-	private String dcpassword;
-	private String dcdriverClassName;
 	private ClassLoader dcclassLoader;
-
-	public String getDcurl() {
-		return dcurl;
-	}
-
-	public void setDcurl(String dcurl) {
-		this.dcurl = dcurl;
-	}
-
-	public String getDcusername() {
-		return dcusername;
-	}
-
-	public void setDcusername(String dcusername) {
-		this.dcusername = dcusername;
-	}
-
-	public String getDcpassword() {
-		return dcpassword;
-	}
-
-	public void setDcpassword(String dcpassword) {
-		this.dcpassword = dcpassword;
-	}
-
-	public String getDcdriverClassName() {
-		return dcdriverClassName;
-	}
-
-	public void setDcdriverClassName(String dcdriverClassName) {
-		this.dcdriverClassName = dcdriverClassName;
-	}
 
 	public ClassLoader getDcclassLoader() {
 		return dcclassLoader;
