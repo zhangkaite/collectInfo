@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.NetInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.NetInfo">
+		select * from netinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and netNo=#{netNo,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.NetInfo">
+		insert into netinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="netNo != null">
+				netNo,
+			</if>
+			<if test="netmask != null">
+				netmask,
+			</if>
+			<if test="rxPackets !=null">
+				rxPackets,
+			</if>
+			<if test="txPackets !=null">
+				txPackets,
+			</if>
+			<if test="rxBytes !=null">
+				rxBytes,
+			</if>
+			<if test="txBytes !=null">
+				txBytes,
+			</if>
+
+			<if test="rxErrors !=null">
+				rxErrors,
+			</if>
+			<if test="txErrors !=null">
+				txErrors,
+			</if>
+			<if test="rxDropped !=null">
+				rxDropped,
+			</if>
+			<if test="txDropped !=null">
+				txDropped,
+			</if>
+
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="netNo != null">
+				#{netNo,jdbcType=VARCHAR},
+			</if>
+			<if test="netmask != null">
+				#{netmask,jdbcType=VARCHAR},
+			</if>
+			<if test="rxPackets !=null">
+				#{rxPackets,jdbcType=VARCHAR},
+			</if>
+			<if test="txPackets != null">
+				#{txPackets,jdbcType=VARCHAR},
+			</if>
+			<if test="rxBytes != null">
+				#{rxBytes,jdbcType=VARCHAR},
+			</if>
+			<if test="txBytes != null">
+				#{txBytes,jdbcType=VARCHAR},
+			</if>
+			<if test="rxErrors != null">
+				#{rxErrors,jdbcType=VARCHAR},
+			</if>
+			<if test="txErrors != null">
+				#{txErrors,jdbcType=VARCHAR},
+			</if>
+			<if test="rxDropped != null">
+				#{rxDropped,jdbcType=VARCHAR},
+			</if>
+			<if test="txDropped != null">
+				#{txDropped,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.NetInfo">
+		update netinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="netNo != null">
+				netNo=#{netNo,jdbcType=VARCHAR},
+			</if>
+			<if test="netmask != null">
+				netmask=#{netmask,jdbcType=VARCHAR},
+			</if>
+			<if test="rxPackets !=null">
+				rxPackets=#{rxPackets,jdbcType=VARCHAR},
+			</if>
+			<if test="txPackets != null">
+				txPackets=#{txPackets,jdbcType=VARCHAR},
+			</if>
+			<if test="rxBytes != null">
+				rxBytes=#{rxBytes,jdbcType=VARCHAR},
+			</if>
+			<if test="txBytes != null">
+				txBytes=#{txBytes,jdbcType=VARCHAR},
+			</if>
+			<if test="rxErrors != null">
+				rxErrors=#{rxErrors,jdbcType=VARCHAR},
+			</if>
+			<if test="txErrors != null">
+				txErrors=#{txErrors,jdbcType=VARCHAR},
+			</if>
+			<if test="rxDropped != null">
+				rxDropped=#{rxDropped,jdbcType=VARCHAR},
+			</if>
+			<if test="txDropped != null">
+				txDropped=#{txDropped,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

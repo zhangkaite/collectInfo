@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.DiskInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.DiskInfo">
+		select * from diskinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		devNo=#{devNo,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.DiskInfo">
+		insert into diskinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="devNo != null">
+				devNo,
+			</if>
+			<if test="devName != null">
+				devName,
+			</if>
+			<if test="dirName !=null">
+				dirName,
+			</if>
+			<if test="flags !=null">
+				flags,
+			</if>
+			<if test="sysTypeName !=null">
+				sysTypeName,
+			</if>
+			<if test="typeName !=null">
+				typeName,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="total != null">
+				total,
+			</if>
+			<if test="free != null">
+				free,
+			</if>
+			<if test="avail != null">
+				avail,
+			</if>
+			<if test="used !=null">
+				used,
+			</if>
+			<if test="usePercent !=null">
+				usePercent,
+			</if>
+			<if test="diskReads !=null">
+				diskReads,
+			</if>
+
+			<if test="diskWrites !=null">
+				diskWrites,
+			</if>
+
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="devNo != null">
+				#{devNo,jdbcType=VARCHAR},
+			</if>
+			<if test="devName != null">
+				#{devName,jdbcType=VARCHAR},
+			</if>
+			<if test="dirName !=null">
+				#{dirName,jdbcType=VARCHAR},
+			</if>
+			<if test="flags !=null">
+				#{flags,jdbcType=VARCHAR},
+			</if>
+			<if test="sysTypeName !=null">
+				#{sysTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="typeName !=null">
+				#{typeName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="total != null">
+				#{total,jdbcType=VARCHAR},
+			</if>
+			<if test="free != null">
+				#{free,jdbcType=VARCHAR},
+			</if>
+			<if test="avail != null">
+				#{avail,jdbcType=VARCHAR},
+			</if>
+			<if test="used !=null">
+				#{used,jdbcType=VARCHAR},
+			</if>
+			<if test="usePercent !=null">
+				#{usePercent,jdbcType=VARCHAR},
+			</if>
+			<if test="diskReads !=null">
+				#{diskReads,jdbcType=VARCHAR},
+			</if>
+
+			<if test="diskWrites !=null">
+				#{diskWrites,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.DiskInfo">
+		update diskinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="devNo != null">
+				devNo=#{devNo,jdbcType=VARCHAR},
+			</if>
+			<if test="devName != null">
+				devName=#{devName,jdbcType=VARCHAR},
+			</if>
+			<if test="dirName !=null">
+				dirName=#{dirName,jdbcType=VARCHAR},
+			</if>
+			<if test="flags !=null">
+				flags=#{flags,jdbcType=VARCHAR},
+			</if>
+			<if test="sysTypeName !=null">
+				sysTypeName=#{sysTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="typeName !=null">
+				typeName=#{typeName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type=#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="total != null">
+				total=#{total,jdbcType=VARCHAR},
+			</if>
+			<if test="free != null">
+				free=#{free,jdbcType=VARCHAR},
+			</if>
+			<if test="avail != null">
+				avail=#{avail,jdbcType=VARCHAR},
+			</if>
+			<if test="used !=null">
+				used=#{used,jdbcType=VARCHAR},
+			</if>
+			<if test="usePercent !=null">
+				usePercent=#{usePercent,jdbcType=VARCHAR},
+			</if>
+			<if test="diskReads !=null">
+				diskReads=#{diskReads,jdbcType=VARCHAR},
+			</if>
+			<if test="diskWrites !=null">
+				diskWrites=#{diskWrites,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>
