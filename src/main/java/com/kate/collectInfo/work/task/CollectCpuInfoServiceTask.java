@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.hyperic.sigar.SigarException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.kate.collectInfo.dao.interfaces.ICpu;
 import com.kate.collectInfo.service.entity.CpuInfo;
 import com.kate.collectInfo.work.service.SigarService;
-import com.kate.collectInfo.work.service.SysInfoService;
 
 @Service
 public class CollectCpuInfoServiceTask {
