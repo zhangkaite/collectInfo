@@ -25,14 +25,14 @@ public class ScheduledTasks {
    private CollectDiskInfoServiceTask collectDiskInfoServiceTask;
    @Autowired
    private CollectNetInfoServiceTask collectNetInfoServiceTask;
-	@Scheduled(cron = "*/5 * * * * *")
+	@Scheduled(cron = "*/30 * * * * *")
 	public void sendHttpWinInfo() {
 		try {
 			collectCpuInfoServiceTask.addCpuInfo();
 			collectMemInfoServiceTask.addMemInfo();
 			collectOperInfoServiceTask.addInfo();
 			collectDiskInfoServiceTask.addList();
-			collectNetInfoServiceTask.addInfo();
+			collectNetInfoServiceTask.addNetInfo();
 			// collectWinInfoTask.excute(null);
 			// System.out.println("work调度成功");
 		} catch (Exception e) {

@@ -29,8 +29,11 @@ public class RumCmdUtil {
 			String line = null;
 			// 逐行读取输出到控制台
 			while ((line = br.readLine()) != null) {
-				dataList.add(line);
-				System.out.println(line);
+				if (line.length()>0) {
+					dataList.add(line);
+					System.out.println(line);
+				}
+				
 			}
 		} catch (IOException e) {
 			throw e;
@@ -40,7 +43,7 @@ public class RumCmdUtil {
 	}
 	
 	
-	private static List<Map<String, Object>> getAllResult(String[] cmdStr, int flag) throws IOException {
+	public static List<Map<String, Object>> getAllResult(String[] cmdStr, int flag) throws IOException {
 		List<Map<String, Object>> list = new ArrayList<>();
 		Integer index = 1;
 		Process p = null;
@@ -51,7 +54,7 @@ public class RumCmdUtil {
 		BufferedReader br = null;
 		try {
 			p = Runtime.getRuntime().exec(cmdStr);
-			isr = new InputStreamReader(p.getInputStream());
+			isr = new InputStreamReader(p.getInputStream(),"gbk");
 			br = new BufferedReader(isr);
 			while ((str = br.readLine()) != null) {
 				if (StringUtils.isNotEmpty(str)) {
