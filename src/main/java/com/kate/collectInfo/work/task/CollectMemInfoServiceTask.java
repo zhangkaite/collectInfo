@@ -14,12 +14,13 @@ import com.kate.collectInfo.work.service.SigarService;
 public class CollectMemInfoServiceTask {
 	public static final Logger logger = LogManager.getLogger(CollectMemInfoServiceTask.class);
 	@Autowired
-	private IMem memImpl;
+	private IMem MemImpl;
 	public void addMemInfo() {
+		
 		try {
 			MemInfo memInfo=SigarService.getMemoryInfos();
 			logger.info("内存采集到的信息:"+JsonUtil.getObjectToJson(memInfo));
-			memImpl.addMemInfo(memInfo);
+			MemImpl.addMemInfo(memInfo);
 		} catch (Exception e) {
 			logger.error("获取内存持久化到mysql失败，失败的原因是:",e);
 		}

@@ -21,10 +21,7 @@ import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 import org.hyperic.sigar.Swap;
 
-import com.kate.collectInfo.service.entity.DiskInfo;
 import com.kate.collectInfo.service.entity.MemInfo;
-import com.kate.collectInfo.service.entity.NetInfo;
-import com.kate.collectInfo.service.entity.SysInfo;
 import com.kate.collectInfo.work.entity.SigarInfoEntity;
 
 public class SigarService {
@@ -42,7 +39,20 @@ public class SigarService {
 		return sigar;
 	}
 
-	
+	/**
+	 * 获取采集机器的ip、mac
+	 * 
+	 * @return
+	 */
+	public static List<SigarInfoEntity> getIpMac() {
+		List<SigarInfoEntity> dataList = new ArrayList<SigarInfoEntity>();
+        String ip=getDefaultIpAddress();
+        String mac=getMAC();
+        dataList.add(new SigarInfoEntity(ip,"主机IP"));
+        dataList.add(new SigarInfoEntity(mac,"主机MAC"));
+		return dataList;
+	}
+
 	// b)取到当前机器的IP地址
 	public static String getDefaultIpAddress() {
 		String address = null;
@@ -241,21 +251,19 @@ public class SigarService {
 	 * 
 	 * @return
 	 */
-	public static SysInfo getOsInfos() {
-		SysInfo sysInfo=new SysInfo();
+	public static List<SigarInfoEntity> getOsInfos() {
+		List<SigarInfoEntity> osInfoList = new ArrayList<SigarInfoEntity>();
 		OperatingSystem os = OperatingSystem.getInstance();
-		sysInfo.setIp(getDefaultIpAddress());
-		sysInfo.setMac(getMAC());
-		sysInfo.setOs(os.getArch());
-		sysInfo.setCpuEndian(os.getCpuEndian());
-		sysInfo.setDataModel(os.getDataModel());
-		sysInfo.setVendor(os.getVendor());
-		sysInfo.setDescription(os.getDescription());
-		sysInfo.setVendorCodeName(os.getVendorCodeName());
-		sysInfo.setVendorName(os.getVendorName());
-		sysInfo.setVersion(os.getVersion());
-		sysInfo.setVendorVersion(os.getVendorVersion());
-		return sysInfo;
+		osInfoList.add(new SigarInfoEntity(os.getArch(), "操作系统"));
+		osInfoList.add(new SigarInfoEntity(os.getCpuEndian(), "操作系统CpuEndian()"));
+		osInfoList.add(new SigarInfoEntity(os.getDataModel(), "操作系统DataModel()"));
+		osInfoList.add(new SigarInfoEntity(os.getDescription(), "操作系统的描述"));
+		osInfoList.add(new SigarInfoEntity(os.getVendor(), "操作系统的供应商"));
+		osInfoList.add(new SigarInfoEntity(os.getVendorCodeName(), "操作系统的供应商编号"));
+		osInfoList.add(new SigarInfoEntity(os.getVendorName(), "操作系统的供应商名称"));
+		osInfoList.add(new SigarInfoEntity(os.getVendorVersion(), "操作系统供应商类型"));
+		osInfoList.add(new SigarInfoEntity(os.getVersion(), "操作系统的版本号"));
+		return osInfoList;
 	}
 
 	/**
@@ -264,21 +272,20 @@ public class SigarService {
 	 * @return
 	 * @throws SigarException
 	 */
-	public static List<DiskInfo> getFileInfos() throws SigarException {
-		List<DiskInfo> fileInfoList = new ArrayList<DiskInfo>();
+	public static List<SigarInfoEntity> getFileInfos() throws SigarException {
+		List<SigarInfoEntity> fileInfoList = new ArrayList<SigarInfoEntity>();
+
 		FileSystem fslist[] = getInstance().getFileSystemList();
 		for (int i = 0; i < fslist.length; i++) {
 			FileSystem fs = fslist[i];
-			DiskInfo diskInfo=new DiskInfo();
-			diskInfo.setDevNo(i+"");
-			diskInfo.setIp(getDefaultIpAddress());
-			diskInfo.setMac(getMAC());
-			diskInfo.setDevName(fs.getDevName());
-			diskInfo.setDirName(fs.getDirName());
-			diskInfo.setFlags(fs.getFlags()+"");
-			diskInfo.setSysTypeName(fs.getSysTypeName());
-			diskInfo.setTypeName(fs.getTypeName());
-			diskInfo.setType(fs.getType()+"");
+			fileInfoList.add(new SigarInfoEntity(i + "", "分区的盘符号" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getDevName(), "盘符名称" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getDirName(), "盘符路径" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getFlags() + "", "盘符标志" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getSysTypeName(), "盘符类型(FAT32,NTFS)" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getTypeName(), "盘符类型名" + i));
+			fileInfoList.add(new SigarInfoEntity(fs.getType() + "", "盘符文件系统类型" + i));
+
 			FileSystemUsage usage = null;
 			usage = getInstance().getFileSystemUsage(fs.getDirName());
 			switch (fs.getType()) {
@@ -287,11 +294,13 @@ public class SigarService {
 			case 1: // TYPE_NONE
 				break;
 			case 2: // TYPE_LOCAL_DISK : 本地硬盘
-				diskInfo.setTotal(usage.getTotal()/1024L+"");
-                diskInfo.setFree(usage.getFree()/1024L+"");
-                diskInfo.setAvail(usage.getAvail()/1024L+"");
-                diskInfo.setUsed(usage.getUsed()/1024L+"");
-                diskInfo.setUsePercent(usage.getUsePercent() * 100D + "%");
+
+				fileInfoList.add(new SigarInfoEntity(usage.getTotal() + "KB", "文件系统总大小" + fs.getDevName()));
+				fileInfoList.add(new SigarInfoEntity(usage.getFree() + "KB", "文件系统剩余大小" + fs.getDevName()));
+				fileInfoList.add(new SigarInfoEntity(usage.getAvail() + "KB", "文件系统可用大小" + fs.getDevName()));
+				fileInfoList.add(new SigarInfoEntity(usage.getUsed() + "KB", "文件系统已经使用量" + fs.getDevName()));
+				fileInfoList.add(new SigarInfoEntity(usage.getUsePercent() * 100D + "%", "文件系统资源的利用率" + fs.getDevName()));
+
 				break;
 			case 3:// TYPE_NETWORK ：网络
 				break;
@@ -302,9 +311,9 @@ public class SigarService {
 			case 6:// TYPE_SWAP ：页面交换
 				break;
 			}
-			diskInfo.setDiskReads(usage.getDiskReads() + "");
-			diskInfo.setDiskWrites(usage.getDiskWrites() + "");
-			fileInfoList.add(diskInfo);
+
+			fileInfoList.add(new SigarInfoEntity(usage.getDiskReads() + "", fs.getDevName() + "读出"));
+			fileInfoList.add(new SigarInfoEntity(usage.getDiskWrites() + "", fs.getDevName() + "写入"));
 		}
 		return fileInfoList;
 	}
@@ -315,33 +324,30 @@ public class SigarService {
 	 * @return
 	 * @throws SigarException
 	 */
-	public static List<NetInfo> getNetInfos() throws SigarException {
-		List<NetInfo> netInfoList = new ArrayList<NetInfo>();
+	public static List<SigarInfoEntity> getNetInfos() throws SigarException {
+		List<SigarInfoEntity> netInfoList = new ArrayList<SigarInfoEntity>();
 		String nIfNames[] = getInstance().getNetInterfaceList();
 		for (int i = 0; i < nIfNames.length; i++) {
 			String name = nIfNames[i];
 			NetInterfaceConfig nIfConfig = getInstance().getNetInterfaceConfig(name);
-			NetInterfaceStat nIfStat = getInstance().getNetInterfaceStat(name);
-			NetInfo netInfo=new NetInfo();
-			netInfo.setNetNo(i+"");
-			netInfo.setIp(getDefaultIpAddress());
-			netInfo.setMac(getMAC());
-			netInfo.setNetmask(nIfConfig.getNetmask());
+
+			netInfoList.add(new SigarInfoEntity(name, "网络设备名" + i));
+			netInfoList.add(new SigarInfoEntity(nIfConfig.getAddress(), "IP地址" + i));
+			netInfoList.add(new SigarInfoEntity(nIfConfig.getNetmask(), "子网掩码" + i));
+
 			if ((nIfConfig.getFlags() & 1L) <= 0L) {
 				System.out.println("getNetInterfaceStat not exist");
-				//continue;
-			}else{
-				netInfo.setRxPackets(nIfStat.getRxPackets()+"");
-				netInfo.setTxPackets(nIfStat.getTxPackets()+"");
-				netInfo.setRxBytes(nIfStat.getRxBytes() +"");
-				netInfo.setTxBytes(nIfStat.getTxBytes() + "");
-				netInfo.setRxErrors(nIfStat.getRxErrors() + "");
-				netInfo.setTxErrors(nIfStat.getTxErrors() + "");
-				netInfo.setRxDropped(nIfStat.getRxDropped() + "");
-				netInfo.setTxDropped(nIfStat.getTxDropped() + "");
+				continue;
 			}
-			
-			netInfoList.add(netInfo);
+			NetInterfaceStat nIfStat = getInstance().getNetInterfaceStat(name);
+			netInfoList.add(new SigarInfoEntity(nIfStat.getRxPackets() + "", "接收的总包裹数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getTxPackets() + "", "发送的总包裹数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getRxBytes() + "", "接收到的总字节数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getTxBytes() + "", "发送的总字节数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getRxErrors() + "", "接收到的错误包数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getTxErrors() + "", "发送数据包时的错误数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getRxDropped() + "", "接收时丢弃的包数" + i));
+			netInfoList.add(new SigarInfoEntity(nIfStat.getTxDropped() + "", "发送时丢弃的包数" + i));
 		}
 		return netInfoList;
 	}

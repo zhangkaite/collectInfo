@@ -27,8 +27,8 @@ public class CollectCpuInfoServiceTask {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<CpuInfo> assembleCpuInfo() throws SigarException {
-		String ip = SigarService.getDefaultIpAddress();
-		String mac = SigarService.getMAC();
+		String ip = SysInfoService.getDefaultIpAddress();
+		String mac = SysInfoService.getMAC();
 		List<Map<String, String>> cList = SigarService.getCpuInfos();
 		List<CpuInfo> cpuList = new ArrayList<CpuInfo>();
 		List<CpuInfo> resList = new ArrayList<CpuInfo>();

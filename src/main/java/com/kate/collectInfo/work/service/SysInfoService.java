@@ -386,7 +386,8 @@ public class SysInfoService {
 	}
 
 	/*public static void main(String[] args) throws Exception {
-		System.out.println(getMAC());
+		SysInfoService sysInfoService = new SysInfoService();
+		sysInfoService.testWho();
 	}*/
 
 }

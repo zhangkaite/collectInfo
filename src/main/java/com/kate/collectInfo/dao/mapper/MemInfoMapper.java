@@ -2,11 +2,11 @@ package com.kate.collectInfo.dao.mapper;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.kate.collectInfo.service.entity.MemInfo;
 
-@Component
+@Service
 public class MemInfoMapper extends AbstractMapper<MemInfo> {
 
 	public Integer addMemInfo(MemInfo memInfo) throws Exception {

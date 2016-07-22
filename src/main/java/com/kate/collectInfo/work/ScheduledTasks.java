@@ -7,10 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.kate.collectInfo.work.task.CollectCpuInfoServiceTask;
-import com.kate.collectInfo.work.task.CollectDiskInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectMemInfoServiceTask;
-import com.kate.collectInfo.work.task.CollectNetInfoServiceTask;
-import com.kate.collectInfo.work.task.CollectOperInfoServiceTask;
 
 @Component
 public class ScheduledTasks {
@@ -19,20 +16,11 @@ public class ScheduledTasks {
 	private CollectCpuInfoServiceTask collectCpuInfoServiceTask;
    @Autowired
 	private CollectMemInfoServiceTask collectMemInfoServiceTask;
-   @Autowired
-   private CollectOperInfoServiceTask collectOperInfoServiceTask;
-   @Autowired
-   private CollectDiskInfoServiceTask collectDiskInfoServiceTask;
-   @Autowired
-   private CollectNetInfoServiceTask collectNetInfoServiceTask;
 	@Scheduled(cron = "*/5 * * * * *")
 	public void sendHttpWinInfo() {
 		try {
 			collectCpuInfoServiceTask.addCpuInfo();
 			collectMemInfoServiceTask.addMemInfo();
-			collectOperInfoServiceTask.addInfo();
-			collectDiskInfoServiceTask.addList();
-			collectNetInfoServiceTask.addInfo();
 			// collectWinInfoTask.excute(null);
 			// System.out.println("work调度成功");
 		} catch (Exception e) {
