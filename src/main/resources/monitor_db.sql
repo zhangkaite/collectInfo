@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50521
 File Encoding         : 65001
 
-Date: 2016-07-23 17:26:41
+Date: 2016-07-23 18:31:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -250,6 +250,28 @@ INSERT INTO `nicinfo` VALUES ('35', '169.254.139.125', '50:7B:9D:77:F0:62', '', 
 INSERT INTO `nicinfo` VALUES ('36', '169.254.139.125', '50:7B:9D:77:F0:62', '隧道', '16', '', 'Microsoft ISATAP Adapter #3', null, 'tunnel', '100000', '2016-07-23 17:18:30');
 INSERT INTO `nicinfo` VALUES ('37', '169.254.139.125', '50:7B:9D:77:F0:62', '隧道', '17', '', 'Microsoft Teredo Tunneling Adapter', null, 'tunnel', '100000', '2016-07-23 17:18:30');
 INSERT INTO `nicinfo` VALUES ('38', '169.254.139.125', '50:7B:9D:77:F0:62', '隧道', '20', '', 'Microsoft ISATAP Adapter #4', null, 'tunnel', '100000', '2016-07-23 17:18:30');
+
+-- ----------------------------
+-- Table structure for portinfo
+-- ----------------------------
+DROP TABLE IF EXISTS `portinfo`;
+CREATE TABLE `portinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(100) DEFAULT NULL,
+  `mac` varchar(100) DEFAULT NULL,
+  `Agreement` varchar(100) DEFAULT NULL COMMENT '协议类型',
+  `LocalAddress` varchar(100) DEFAULT NULL COMMENT '本地地址',
+  `statu` varchar(100) DEFAULT NULL COMMENT '状态',
+  `Pid` varchar(100) DEFAULT NULL COMMENT '进程ID',
+  `Name` varchar(100) DEFAULT NULL COMMENT '应用名称',
+  `ExecutablePath` varchar(1000) DEFAULT NULL COMMENT '应用安装位置',
+  `updateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of portinfo
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for processinfo
