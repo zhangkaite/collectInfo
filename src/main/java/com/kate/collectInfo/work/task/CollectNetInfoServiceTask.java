@@ -12,6 +12,7 @@ import com.kate.collectInfo.dao.interfaces.IService;
 import com.kate.collectInfo.service.entity.BiosInfo;
 import com.kate.collectInfo.service.entity.NetInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
+import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
 import com.kate.collectInfo.service.entity.SoundInfo;
@@ -94,5 +95,18 @@ public class CollectNetInfoServiceTask {
 		}
 
 	}
+	//portInfo
+	
+	public void addportInfo() {
+		try {
+			List<PortInfo> list = WmicService.getPortInfoList();
+			logger.info("port采集到的信息:" + JsonUtil.getObjectToJson(list));
+			serviceImpl.addPortInfo(list);
+		} catch (Exception e) {
+			logger.error("获取port信息持久化到mysql失败，失败的原因是:", e);
+		}
+
+	}
+	
 
 }

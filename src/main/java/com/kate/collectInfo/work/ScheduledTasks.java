@@ -39,10 +39,26 @@ public class ScheduledTasks {
 			collectNetInfoServiceTask.addSoundListInfo();
 			collectNetInfoServiceTask.addServiceInfo();
 			collectNetInfoServiceTask.addProcessInfoList();
-			// collectWinInfoTask.excute(null);
-			// System.out.println("work调度成功");
 		} catch (Exception e) {
 			logger.error("collectWinInfoTask work调用失败，失败的原因是:", e);
 		}
 	}
+	
+	@Scheduled(cron = "* */5 * * * *")
+	public void sendPortInfo() {
+		try {
+			
+			collectNetInfoServiceTask.addportInfo();
+		} catch (Exception e) {
+			logger.error("collectWinInfoTask work调用失败，失败的原因是:", e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

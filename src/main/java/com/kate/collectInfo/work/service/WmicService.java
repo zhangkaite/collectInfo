@@ -15,6 +15,7 @@ import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
 import com.kate.collectInfo.service.entity.SoundInfo;
+import com.kate.collectInfo.tools.JsonUtil;
 import com.kate.collectInfo.tools.RumCmdUtil;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -169,12 +170,21 @@ public class WmicService {
 				PortInfo portInfo = new PortInfo();
 				portInfo.setIp(SigarService.getDefaultIpAddress());
 				portInfo.setMac(SigarService.getMAC());
-				portInfo.setAgreement(datas[0]);
-				portInfo.setLocalAddress(datas[1]);
-				portInfo.setStatu(datas[3]);
-				portInfo.setPid(datas[4]);
-				portInfo.setName(RumCmdUtil.getTaskDetail(Integer.valueOf(datas[4])).get("Name").toString());
-				dataList.add(portInfo);
+				if ("TCP".equals(datas[1])) {
+					portInfo.setAgreement(datas[1]);
+					portInfo.setLocalAddress(datas[2]);
+					portInfo.setStatu(datas[4]);
+					portInfo.setPid(datas[5]);
+					Map resultMap=RumCmdUtil.getTaskDetail(Integer.valueOf(datas[5]));
+					if (null!=resultMap&&resultMap.size()>0) {
+						portInfo.setName(resultMap.get("Name")==null?"":resultMap.get("Name").toString());	
+						portInfo.setExecutablePath(resultMap.get("ExecutablePath")==null?"":resultMap.get("ExecutablePath").toString());
+						
+					}
+					portInfo.setUpdateTime(new Date());
+					dataList.add(portInfo);
+				}
+			
 			}
 		} catch (Exception e) {
 			logger.error("获取服务列表失败，失败的原因是:", e);

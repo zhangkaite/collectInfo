@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import com.kate.collectInfo.dao.interfaces.IService;
 import com.kate.collectInfo.dao.mapper.BiosInfoMapper;
 import com.kate.collectInfo.dao.mapper.NicInfoMapper;
+import com.kate.collectInfo.dao.mapper.PortInfoMapper;
 import com.kate.collectInfo.dao.mapper.ProcessInfoMapper;
 import com.kate.collectInfo.dao.mapper.ServiceInfoMapper;
 import com.kate.collectInfo.dao.mapper.SoundInfoMapper;
 import com.kate.collectInfo.service.entity.BiosInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
+import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
 import com.kate.collectInfo.service.entity.SoundInfo;
@@ -29,9 +31,10 @@ public class ServiceImpl implements IService {
 	private SoundInfoMapper soundInfoMapper;
 	@Autowired
 	private BiosInfoMapper biosInfoMapper;
+	@Autowired
+	private PortInfoMapper portInfoMapper;
 	@Override
 	public Integer addNicInfo(List<NicInfo> netInfo) throws Exception {
-		// TODO Auto-generated method stub
 		return nicInfoMapper.addNetInfoList(netInfo);
 	}
 
@@ -53,6 +56,11 @@ public class ServiceImpl implements IService {
 	@Override
 	public Integer addBiosInfo(List<BiosInfo> netInfo) throws Exception {
 		return biosInfoMapper.addNetInfoList(netInfo);
+	}
+
+	@Override
+	public Integer addPortInfo(List<PortInfo> portInfoList) throws Exception {
+		return portInfoMapper.addNetInfoList(portInfoList);
 	}
 
 }

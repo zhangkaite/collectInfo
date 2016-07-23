@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.PortInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.PortInfo">
+		select * from portinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		Name=#{Name,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.PortInfo">
+		insert into portinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="Agreement != null">
+				Agreement,
+			</if>
+			<if test="LocalAddress != null">
+				LocalAddress,
+			</if>
+			<if test="statu !=null">
+				statu,
+			</if>
+			<if test="Pid !=null">
+				Pid,
+			</if>
+
+			<if test="Name !=null">
+				Name,
+			</if>
+			<if test="ExecutablePath !=null">
+				ExecutablePath,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="Agreement != null">
+				#{Agreement,jdbcType=VARCHAR},
+			</if>
+			<if test="LocalAddress != null">
+				#{LocalAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="statu !=null">
+				#{statu,jdbcType=VARCHAR},
+			</if>
+			<if test="Pid !=null">
+				#{Pid,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ExecutablePath !=null">
+				#{ExecutablePath,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.PortInfo">
+		update portinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="Agreement != null">
+				Agreement=#{Agreement,jdbcType=VARCHAR},
+			</if>
+			<if test="LocalAddress != null">
+				LocalAddress=#{LocalAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="statu !=null">
+				statu=#{statu,jdbcType=VARCHAR},
+			</if>
+			<if test="Pid !=null">
+				Pid=#{Pid,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				Name=#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ExecutablePath !=null">
+				ExecutablePath=#{ExecutablePath,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

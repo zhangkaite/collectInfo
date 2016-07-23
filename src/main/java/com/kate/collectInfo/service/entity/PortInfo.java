@@ -1,5 +1,7 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 public class PortInfo {
 	
 	private String id;
@@ -10,6 +12,8 @@ public class PortInfo {
 	private String statu;
 	private String Pid;
 	private String Name;
+	private String ExecutablePath;
+	private Date updateTime;
 	public String getId() {
 		return id;
 	}
@@ -57,6 +61,18 @@ public class PortInfo {
 	}
 	public void setName(String name) {
 		Name = name;
+	}
+	public String getExecutablePath() {
+		return ExecutablePath;
+	}
+	public void setExecutablePath(String executablePath) {
+		ExecutablePath = executablePath;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 	

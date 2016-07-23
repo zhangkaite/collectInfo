@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 public class RumCmdUtil {
 	public static final Logger logger = LogManager.getLogger(RumCmdUtil.class);
+
 	public static List<Object> getSysInfo(String command) throws Exception {
 		List<Object> dataList = new ArrayList<Object>();
 		Process process;
@@ -29,11 +30,11 @@ public class RumCmdUtil {
 			String line = null;
 			// 逐行读取输出到控制台
 			while ((line = br.readLine()) != null) {
-				if (line.length()>0) {
+				if (line.length() > 0) {
 					dataList.add(line);
-					System.out.println(line);
+					//System.out.println(line);
 				}
-				
+
 			}
 		} catch (IOException e) {
 			throw e;
@@ -41,8 +42,7 @@ public class RumCmdUtil {
 
 		return dataList;
 	}
-	
-	
+
 	public static List<Map<String, Object>> getAllResult(String[] cmdStr, int flag) throws IOException {
 		List<Map<String, Object>> list = new ArrayList<>();
 		Integer index = 1;
@@ -54,7 +54,7 @@ public class RumCmdUtil {
 		BufferedReader br = null;
 		try {
 			p = Runtime.getRuntime().exec(cmdStr);
-			isr = new InputStreamReader(p.getInputStream(),"gbk");
+			isr = new InputStreamReader(p.getInputStream(), "gbk");
 			br = new BufferedReader(isr);
 			while ((str = br.readLine()) != null) {
 				if (StringUtils.isNotEmpty(str)) {
@@ -121,7 +121,7 @@ public class RumCmdUtil {
 	}
 
 	private static Map<String, Object> printStream(InputStream input) throws IOException { // InputStream
-		InputStreamReader isr = new InputStreamReader(input,"gbk"); // proc.getInputStream()
+		InputStreamReader isr = new InputStreamReader(input, "gbk"); // proc.getInputStream()
 		BufferedReader br = new BufferedReader(isr);
 		Map<String, Object> map = new HashMap<String, Object>();
 		String str = null;
@@ -340,8 +340,9 @@ public class RumCmdUtil {
 	 * @throws IOException
 	 */
 	public static Map<String, Object> getTaskDetail(Integer processId) throws IOException {
-		String[] cmdStr = { "cmd", "/C", "wmic process where processid='" + processId + "' list full" };// get
-																										// /format:value
+		String[] cmdStr = { "cmd", "/C",
+				"wmic process where processid='" + processId + "' get ExecutablePath,Name /value" };// get
+		// /format:value
 		logger.info(Arrays.toString(cmdStr));
 		try {
 			return execCommand(cmdStr);
@@ -507,6 +508,5 @@ public class RumCmdUtil {
 		data[2] = processTime;
 		return data;
 	}
-
 
 }

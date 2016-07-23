@@ -328,7 +328,7 @@ public class SigarService {
 			netInfo.setMac(getMAC());
 			netInfo.setNetmask(nIfConfig.getNetmask());
 			if ((nIfConfig.getFlags() & 1L) <= 0L) {
-				System.out.println("getNetInterfaceStat not exist");
+				//System.out.println("getNetInterfaceStat not exist");
 				//continue;
 			}else{
 				netInfo.setRxPackets(nIfStat.getRxPackets()+"");
