@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.NicInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.NicInfo">
+		select * from nicinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		DeviceID=#{DeviceID,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.NicInfo">
+		insert into nicinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="AdapterType != null">
+				AdapterType,
+			</if>
+			<if test="DeviceID != null">
+				DeviceID,
+			</if>
+			<if test="MACAddress !=null">
+				MACAddress,
+			</if>
+			<if test="Name !=null">
+				Name,
+			</if>
+
+			<if test="ServiceName !=null">
+				ServiceName,
+			</if>
+			<if test="Speed !=null">
+				Speed,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="AdapterType != null">
+				#{AdapterType,jdbcType=VARCHAR},
+			</if>
+			<if test="DeviceID != null">
+				#{DeviceID,jdbcType=VARCHAR},
+			</if>
+			<if test="MACAddress !=null">
+				#{MACAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ServiceName !=null">
+				#{ServiceName,jdbcType=VARCHAR},
+			</if>
+			<if test="Speed !=null">
+				#{Speed,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.NicInfo">
+		update nicinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="AdapterType != null">
+				AdapterType=#{AdapterType,jdbcType=VARCHAR},
+			</if>
+			<if test="DeviceID != null">
+				DeviceID=#{DeviceID,jdbcType=VARCHAR},
+			</if>
+			<if test="MACAddress !=null">
+				MACAddress=#{MACAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				Name=#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ServiceName !=null">
+				ServiceName=#{ServiceName,jdbcType=VARCHAR},
+			</if>
+			<if test="Speed !=null">
+				Speed=#{Speed,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

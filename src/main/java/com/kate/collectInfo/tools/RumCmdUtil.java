@@ -58,13 +58,13 @@ public class RumCmdUtil {
 			br = new BufferedReader(isr);
 			while ((str = br.readLine()) != null) {
 				if (StringUtils.isNotEmpty(str)) {
+					arrStr = str.split("=");
+					str = str.endsWith("=") ? "" : arrStr[1];
+					map.put(arrStr[0], str);
 					if (index % flag == 0) {
 						list.add(map);
 						map = new HashMap<String, Object>();
 					}
-					arrStr = str.split("=");
-					str = str.endsWith("=") ? "" : arrStr[1];
-					map.put(arrStr[0], str);
 					index++;
 				}
 			}

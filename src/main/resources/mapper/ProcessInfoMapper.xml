@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.ProcessInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.ProcessInfo">
+		select * from processinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		ProcessId=#{ProcessId,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.ProcessInfo">
+		insert into processinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="CreationClassName != null">
+				CreationClassName,
+			</if>
+			<if test="CSName != null">
+				CSName,
+			</if>
+			<if test="ExecutablePath !=null">
+				ExecutablePath,
+			</if>
+			<if test="Name !=null">
+				Name,
+			</if>
+			<if test="OSName !=null">
+				OSName,
+			</if>
+			<if test="ProcessId !=null">
+				ProcessId,
+			</if>
+			<if test="SessionId !=null">
+				SessionId,
+			</if>
+			<if test="ThreadCount !=null">
+				ThreadCount,
+			</if>
+			<if test="VirtualSize !=null">
+				VirtualSize,
+			</if>
+			<if test="WindowsVersion !=null">
+				WindowsVersion,
+			</if>
+			<if test="WorkingSetSize !=null">
+				WorkingSetSize,
+			</if>
+			<if test="CpuRatioForWindows !=null">
+				CpuRatioForWindows,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="CreationClassName != null">
+				#{CreationClassName,jdbcType=VARCHAR},
+			</if>
+			<if test="CSName != null">
+				#{CSName,jdbcType=VARCHAR},
+			</if>
+			<if test="ExecutablePath !=null">
+				#{ExecutablePath,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="OSName !=null">
+				#{OSName,jdbcType=VARCHAR},
+			</if>
+			<if test="ProcessId !=null">
+				#{ProcessId,jdbcType=VARCHAR},
+			</if>
+			<if test="SessionId !=null">
+				#{SessionId,jdbcType=VARCHAR},
+			</if>
+			<if test="ThreadCount !=null">
+				#{ThreadCount,jdbcType=VARCHAR},
+			</if>
+			<if test="VirtualSize !=null">
+				#{VirtualSize,jdbcType=VARCHAR},
+			</if>
+			<if test="WindowsVersion !=null">
+				#{WindowsVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="WorkingSetSize !=null">
+				#{WorkingSetSize,jdbcType=VARCHAR},
+			</if>
+			<if test="CpuRatioForWindows !=null">
+				#{CpuRatioForWindows,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.ProcessInfo">
+		update processinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="CreationClassName != null">
+				CreationClassName=#{CreationClassName,jdbcType=VARCHAR},
+			</if>
+			<if test="CSName != null">
+				CSName=#{CSName,jdbcType=VARCHAR},
+			</if>
+			<if test="ExecutablePath !=null">
+				ExecutablePath=#{ExecutablePath,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				Name=#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="OSName !=null">
+				OSName=#{OSName,jdbcType=VARCHAR},
+			</if>
+			<if test="ProcessId !=null">
+				ProcessId=#{ProcessId,jdbcType=VARCHAR},
+			</if>
+			<if test="SessionId !=null">
+				SessionId=#{SessionId,jdbcType=VARCHAR},
+			</if>
+			<if test="ThreadCount !=null">
+				ThreadCount=#{ThreadCount,jdbcType=VARCHAR},
+			</if>
+			<if test="VirtualSize !=null">
+				VirtualSize=#{VirtualSize,jdbcType=VARCHAR},
+			</if>
+			<if test="WindowsVersion !=null">
+				WindowsVersion=#{WindowsVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="WorkingSetSize !=null">
+				WorkingSetSize=#{WorkingSetSize,jdbcType=VARCHAR},
+			</if>
+			<if test="CpuRatioForWindows !=null">
+				CpuRatioForWindows=#{CpuRatioForWindows,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

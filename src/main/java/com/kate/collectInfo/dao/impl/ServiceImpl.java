@@ -2,9 +2,15 @@ package com.kate.collectInfo.dao.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kate.collectInfo.dao.interfaces.IService;
+import com.kate.collectInfo.dao.mapper.BiosInfoMapper;
+import com.kate.collectInfo.dao.mapper.NicInfoMapper;
+import com.kate.collectInfo.dao.mapper.ProcessInfoMapper;
+import com.kate.collectInfo.dao.mapper.ServiceInfoMapper;
+import com.kate.collectInfo.dao.mapper.SoundInfoMapper;
 import com.kate.collectInfo.service.entity.BiosInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
@@ -13,34 +19,40 @@ import com.kate.collectInfo.service.entity.SoundInfo;
 @Service
 public class ServiceImpl implements IService {
 
+	@Autowired
+	private NicInfoMapper nicInfoMapper;
+	@Autowired
+	private ProcessInfoMapper processInfoMapper;
+	@Autowired
+	private ServiceInfoMapper serviceInfoMapper;
+	@Autowired
+	private SoundInfoMapper soundInfoMapper;
+	@Autowired
+	private BiosInfoMapper biosInfoMapper;
 	@Override
 	public Integer addNicInfo(List<NicInfo> netInfo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return nicInfoMapper.addNetInfoList(netInfo);
 	}
 
 	@Override
 	public Integer addProcessInfoList(List<ProcessInfo> processInfo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return processInfoMapper.addInfoList(processInfo);
 	}
 
 	@Override
 	public Integer addServiceInfo(List<ServiceInfo> serviceInfo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return serviceInfoMapper.addInfoList(serviceInfo);
 	}
 
 	@Override
 	public Integer addSoundListInfo(List<SoundInfo> soundInfo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return soundInfoMapper.addInfoList(soundInfo);
 	}
 
 	@Override
 	public Integer addBiosInfo(List<BiosInfo> netInfo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return biosInfoMapper.addNetInfoList(netInfo);
 	}
 
 }

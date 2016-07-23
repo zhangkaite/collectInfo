@@ -1,6 +1,7 @@
 package com.kate.collectInfo.work.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
 import com.kate.collectInfo.service.entity.SoundInfo;
-import com.kate.collectInfo.tools.JsonUtil;
 import com.kate.collectInfo.tools.RumCmdUtil;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -38,6 +38,7 @@ public class WmicService {
 				nicInfo.setSpeed(map.get("Speed") != null ? map.get("Speed").toString() : "");
 				nicInfo.setIp(SigarService.getDefaultIpAddress());
 				nicInfo.setMac(SigarService.getMAC());
+				nicInfo.setUpdateTime(new Date());
 				dataList.add(nicInfo);
 			}
 			
@@ -68,6 +69,7 @@ public class WmicService {
 				processInfo.setVirtualSize(map.get("VirtualSize") != null ? map.get("VirtualSize").toString() : "");
 				processInfo.setWindowsVersion(map.get("WindowsVersion") != null ? map.get("WindowsVersion").toString() : "");
 				processInfo.setWorkingSetSize(map.get("WorkingSetSize") != null ? map.get("WorkingSetSize").toString() : "");
+				processInfo.setUpdateTime(new Date());
 			//	processInfo.setCpuRatioForWindows(RumCmdUtil.getCpuRatioForWindows(map.get("Name") != null ? map.get("Name").toString() : ""));
 				dataList.add(processInfo);
 			}
@@ -81,18 +83,24 @@ public class WmicService {
 
 	public static List<ServiceInfo> getServiceInfoList() {
 		List<ServiceInfo> dataList = new ArrayList<ServiceInfo>();
-		String[] command = { "cmd", "/C", "wmic SERVICE get Description,Name,StartMode,State /value" };
+		String[] command = { "cmd", "/C", "wmic SERVICE get Description,Name,StartMode,State,ProcessId,PathName /value" };
 		try {
-			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 4);
+			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 6);
 			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 				Map<String, Object> map = (Map<String, Object>) iterator.next();
 				ServiceInfo serviceInfo = new ServiceInfo();
+				if ("Stopped".equals(map.get("State").toString())) {
+					continue;
+				}
 				serviceInfo.setIp(SigarService.getDefaultIpAddress());
 				serviceInfo.setMac(SigarService.getMAC());
 				serviceInfo.setDescription(map.get("Description") != null ? map.get("Description").toString() : "");
 				serviceInfo.setName(map.get("Name") != null ? map.get("Name").toString() : "");
 				serviceInfo.setStartMode(map.get("StartMode") != null ? map.get("StartMode").toString() : "");
 				serviceInfo.setState(map.get("State") != null ? map.get("State").toString() : "");
+				serviceInfo.setProcessId(map.get("ProcessId") != null ? map.get("ProcessId").toString() : "");
+				serviceInfo.setPathName(map.get("PathName") != null ? map.get("PathName").toString() : "");
+				serviceInfo.setUpdateTime(new Date());
 				dataList.add(serviceInfo);
 			}
 
@@ -114,6 +122,7 @@ public class WmicService {
 				soundInfo.setMac(SigarService.getMAC());
 				soundInfo.setDescription(map.get("Description") != null ? map.get("Description").toString() : "");
 				soundInfo.setStatus(map.get("Status") != null ? map.get("Status").toString() : "");
+				soundInfo.setUpdateTime(new Date());
 				dataList.add(soundInfo);
 			}
 
@@ -126,9 +135,9 @@ public class WmicService {
 
 	public static List<BiosInfo> getBiosInfo(){
 		List<BiosInfo> dataList = new ArrayList<BiosInfo>();
-		String[] command = { "cmd", "/C", "wmic bios get Manufacturer,Name,BIOSVersion /value" };
+		String[] command = { "cmd", "/C", "wmic bios get Name, Manufacturer,BIOSVersion /value" };
 		try {
-			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 2);
+			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 3);
 			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 				Map<String, Object> map = (Map<String, Object>) iterator.next();
 				BiosInfo biosInfo = new BiosInfo();
@@ -137,6 +146,7 @@ public class WmicService {
 				biosInfo.setManufacturer(map.get("Manufacturer") != null ? map.get("Manufacturer").toString() : "");
 				biosInfo.setName(map.get("Name") != null ? map.get("Name").toString() : "");
 				biosInfo.setBIOSVersion(map.get("BIOSVersion") != null ? map.get("BIOSVersion").toString() : "");
+				biosInfo.setUpdateTime(new Date());
 				dataList.add(biosInfo);
 			}
 		} catch (Exception e) {

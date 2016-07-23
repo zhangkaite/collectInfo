@@ -1,5 +1,7 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 public class BiosInfo {
 	// wmic bios get Manufacturer,Name,BIOSVersion /value
 
@@ -9,6 +11,7 @@ public class BiosInfo {
 	private String Manufacturer;
 	private String Name;
 	private String BIOSVersion;
+	private Date updateTime;
 
 	public String getId() {
 		return id;
@@ -56,6 +59,14 @@ public class BiosInfo {
 
 	public void setBIOSVersion(String bIOSVersion) {
 		BIOSVersion = bIOSVersion;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }

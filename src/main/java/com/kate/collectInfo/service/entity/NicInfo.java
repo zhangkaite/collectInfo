@@ -1,5 +1,7 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 /**
  * 获取网卡信息
  * 
@@ -7,7 +9,8 @@ package com.kate.collectInfo.service.entity;
  *
  */
 public class NicInfo {
-	
+
+	private String id;
 	private String ip;
 	private String mac;
 	// 适配器类型
@@ -23,6 +26,16 @@ public class NicInfo {
 	private String ServiceName;
 	// 速率
 	private String Speed;
+
+	private Date updateTime;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getIp() {
 		return ip;
@@ -94,6 +107,14 @@ public class NicInfo {
 
 	public void setSpeed(String speed) {
 		Speed = speed;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }

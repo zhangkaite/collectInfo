@@ -1,5 +1,7 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 public class ProcessInfo {
 
 	private String id;
@@ -17,6 +19,7 @@ public class ProcessInfo {
 	private String WindowsVersion;
 	private String WorkingSetSize;
 	private String CpuRatioForWindows;
+	private Date updateTime;
 
 	public String getId() {
 		return id;
@@ -136,6 +139,14 @@ public class ProcessInfo {
 
 	public void setCpuRatioForWindows(String cpuRatioForWindows) {
 		CpuRatioForWindows = cpuRatioForWindows;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	

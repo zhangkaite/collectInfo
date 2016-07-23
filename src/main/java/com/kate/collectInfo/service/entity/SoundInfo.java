@@ -1,11 +1,14 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 public class SoundInfo {
 	private String id;
 	private String ip;
 	private String mac;
 	private String Description;
 	private String Status;
+	private Date updateTime;
 	public String getId() {
 		return id;
 	}
@@ -35,6 +38,12 @@ public class SoundInfo {
 	}
 	public void setStatus(String status) {
 		Status = status;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 

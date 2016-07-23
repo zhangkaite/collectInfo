@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.ServiceInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.ServiceInfo">
+		select * from serviceinfo
+		where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		Name=#{Name,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.ServiceInfo">
+		insert into serviceinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="Description != null">
+				Description,
+			</if>
+
+			<if test="Name !=null">
+				Name,
+			</if>
+			<if test="ProcessId !=null">
+				ProcessId,
+			</if>
+			<if test="StartMode !=null">
+				StartMode,
+			</if>
+			<if test="State !=null">
+				State,
+			</if>
+			
+			<if test="Status !=null">
+				Status,
+			</if>
+			<if test="PathName !=null">
+				PathName,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="Description != null">
+				#{Description,jdbcType=VARCHAR},
+			</if>
+
+			<if test="Name !=null">
+				#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ProcessId !=null">
+				#{ProcessId,jdbcType=VARCHAR},
+			</if>
+			<if test="StartMode !=null">
+				#{StartMode,jdbcType=VARCHAR},
+			</if>
+			<if test="State !=null">
+				#{State,jdbcType=VARCHAR},
+			</if>
+			<if test="Status !=null">
+				#{Status,jdbcType=VARCHAR},
+			</if>
+			<if test="PathName !=null">
+				#{PathName,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.ServiceInfo">
+		update serviceinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="Description != null">
+				Description=#{Description,jdbcType=VARCHAR},
+			</if>
+			<if test="Name !=null">
+				Name=#{Name,jdbcType=VARCHAR},
+			</if>
+			<if test="ProcessId !=null">
+				ProcessId=#{ProcessId,jdbcType=VARCHAR},
+			</if>
+			<if test="StartMode !=null">
+				StartMode=#{StartMode,jdbcType=VARCHAR},
+			</if>
+			<if test="State !=null">
+				State=#{State,jdbcType=VARCHAR},
+			</if>
+			<if test="Status !=null">
+				Status=#{Status,jdbcType=VARCHAR},
+			</if>
+			<if test="PathName !=null">
+				PathName=#{PathName,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

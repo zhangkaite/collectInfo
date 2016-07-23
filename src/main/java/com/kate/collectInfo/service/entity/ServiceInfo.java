@@ -1,5 +1,7 @@
 package com.kate.collectInfo.service.entity;
 
+import java.util.Date;
+
 public class ServiceInfo {
 	private String id;
 	private String ip;
@@ -10,6 +12,8 @@ public class ServiceInfo {
 	private String StartMode;
 	private String State;
 	private String Status;
+	private String PathName;
+	private Date updateTime;
 	public String getId() {
 		return id;
 	}
@@ -64,6 +68,18 @@ public class ServiceInfo {
 	}
 	public void setStatus(String status) {
 		Status = status;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getPathName() {
+		return PathName;
+	}
+	public void setPathName(String pathName) {
+		PathName = pathName;
 	}
 	
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.kate.collectInfo.work.task.CollectCpuInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectDiskInfoServiceTask;
+import com.kate.collectInfo.work.task.CollectInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectMemInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectNetInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectOperInfoServiceTask;
@@ -25,6 +26,7 @@ public class ScheduledTasks {
    private CollectDiskInfoServiceTask collectDiskInfoServiceTask;
    @Autowired
    private CollectNetInfoServiceTask collectNetInfoServiceTask;
+ 
 	@Scheduled(cron = "*/30 * * * * *")
 	public void sendHttpWinInfo() {
 		try {
@@ -33,6 +35,11 @@ public class ScheduledTasks {
 			collectOperInfoServiceTask.addInfo();
 			collectDiskInfoServiceTask.addList();
 			collectNetInfoServiceTask.addNetInfo();
+			collectNetInfoServiceTask.addNicInfo();
+			collectNetInfoServiceTask.addBiosInfo();
+			collectNetInfoServiceTask.addSoundListInfo();
+			collectNetInfoServiceTask.addServiceInfo();
+			collectNetInfoServiceTask.addProcessInfoList();
 			// collectWinInfoTask.excute(null);
 			// System.out.println("work调度成功");
 		} catch (Exception e) {
