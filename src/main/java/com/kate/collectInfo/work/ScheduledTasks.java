@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.kate.collectInfo.work.task.CollectCpuInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectDiskInfoServiceTask;
-import com.kate.collectInfo.work.task.CollectInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectMemInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectNetInfoServiceTask;
 import com.kate.collectInfo.work.task.CollectOperInfoServiceTask;
