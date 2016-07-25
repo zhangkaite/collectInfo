@@ -44,7 +44,8 @@ public class RumCmdUtil {
 	}
 
 	public static List<Map<String, Object>> getAllResult(String[] cmdStr, int flag) throws IOException {
-		List<Map<String, Object>> list = new ArrayList<>();
+		//Map<String, Object>
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Integer index = 1;
 		Process p = null;
 		String str = null;
@@ -73,7 +74,7 @@ public class RumCmdUtil {
 			throw e;
 		} catch (Exception e) {
 			logger.error("获取执行结果失败！", e);
-			throw e;
+			//throw e;
 		} finally {
 			try {
 				if (br != null) {
@@ -198,7 +199,7 @@ public class RumCmdUtil {
 
 	public static Map<String, Object> execCommand(String[] cmdStr) throws IOException {
 		Process p = null;
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			p = Runtime.getRuntime().exec(cmdStr);
 			logger.info("执行错误信息： " + printErrorStream(p.getErrorStream()));
@@ -208,7 +209,7 @@ public class RumCmdUtil {
 			throw e;
 		} catch (Exception e) {
 			logger.error("获取执行结果失败！", e);
-			throw e;
+			//throw e;
 		} finally {
 			if (p != null) {
 				p.destroy();

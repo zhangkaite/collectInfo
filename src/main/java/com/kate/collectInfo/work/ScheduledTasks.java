@@ -44,7 +44,7 @@ public class ScheduledTasks {
 		}
 	}
 	
-	@Scheduled(cron = "* */5 * * * *")
+	@Scheduled(cron = "0 */5 * * * *")
 	public void sendPortInfo() {
 		try {
 			
