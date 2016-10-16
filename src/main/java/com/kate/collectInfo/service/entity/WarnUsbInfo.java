@@ -10,6 +10,7 @@ public class WarnUsbInfo {
 	private String model;
 	private String serialNumber;
 	private String signature;
+	private String status;
 	private Date updateTime;
 	public String getId() {
 		return id;
@@ -52,6 +53,13 @@ public class WarnUsbInfo {
 	}
 	public void setModel(String model) {
 		this.model = model;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getSignature() {
 		return signature;
