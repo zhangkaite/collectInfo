@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.NicInfo;
 
 @Component
 public class NicInfoMapper extends AbstractMapper<NicInfo> {
-	public Integer addNetInfoList(List<NicInfo> dataList) throws Exception {
+	public Integer addInfoList(List<NicInfo> dataList) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.NicInfoMapper");
 		for (NicInfo nicInfo : dataList) {
 			NicInfo isExit = queryData(nicInfo);

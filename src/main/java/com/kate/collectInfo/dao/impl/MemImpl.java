@@ -16,7 +16,7 @@ public class MemImpl implements IMem {
 	@Override
 	public Integer addMemInfo(MemInfo memInfo) throws Exception {
 
-		return memInfoMapper.addMemInfo(memInfo);
+		return memInfoMapper.addInfoList(memInfo);
 	}
 
 }

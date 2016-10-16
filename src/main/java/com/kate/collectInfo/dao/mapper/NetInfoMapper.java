@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.NetInfo;
 
 @Component
 public class NetInfoMapper extends AbstractMapper<NetInfo> {
-	public Integer addNetInfoList(List<NetInfo> dataList) throws Exception {
+	public Integer addInfoList(List<NetInfo> dataList) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.NetInfoMapper");
 		for (NetInfo netInfo : dataList) {
 			NetInfo isExit = queryData(netInfo);

@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.MemInfo;
 @Component
 public class MemInfoMapper extends AbstractMapper<MemInfo> {
 
-	public Integer addMemInfo(MemInfo memInfo) throws Exception {
+	public Integer addInfoList(MemInfo memInfo) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.MenInfoMapper");
 		MemInfo isExit = queryData(memInfo);
 		Integer result = null;

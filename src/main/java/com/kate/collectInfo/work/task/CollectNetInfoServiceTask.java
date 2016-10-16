@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.kate.collectInfo.dao.interfaces.INet;
 import com.kate.collectInfo.dao.interfaces.IService;
 import com.kate.collectInfo.service.entity.BiosInfo;
+import com.kate.collectInfo.service.entity.DiskDriverInfo;
 import com.kate.collectInfo.service.entity.NetInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
+import com.kate.collectInfo.service.entity.OsInfo;
 import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
@@ -108,5 +110,29 @@ public class CollectNetInfoServiceTask {
 
 	}
 	
+	//DiskDriverInfo
+	public void addDiskDriverInfo() {
+		try {
+			List<DiskDriverInfo> list = WmicService.getDiskDriverInfoList();
+			logger.info("DiskDriverInfo采集到的信息:" + JsonUtil.getObjectToJson(list));
+		    serviceImpl.addDiskDriverInfo(list);
+		} catch (Exception e) {
+			logger.error("获取DiskDriverInfo信息持久化到mysql失败，失败的原因是:", e);
+		}
+
+	}
+	
+	
+	//DiskDriverInfo
+		public void addOsInfo() {
+			try {
+				List<OsInfo> list = WmicService.getOsInfoList();
+				logger.info("OsInfo采集到的信息:" + JsonUtil.getObjectToJson(list));
+			    serviceImpl.addOsinfo(list);
+			} catch (Exception e) {
+				logger.error("获取DiskDriverInfo信息持久化到mysql失败，失败的原因是:", e);
+			}
+
+		}
 
 }

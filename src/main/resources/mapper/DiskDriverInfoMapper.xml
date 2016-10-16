@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.DiskDriverMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.DiskDriverInfo">
+		select * from diskdriverinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} and
+		serialNumber=#{serialNumber,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.DiskDriverInfo">
+		insert into diskdriverinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="mediaType != null">
+				mediaType,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="serialNumber !=null">
+				serialNumber,
+			</if>
+			<if test="signature !=null">
+				signature,
+			</if>
+			
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="mediaType != null">
+				#{mediaType,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="signature !=null">
+				#{signature,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.DiskDriverInfo">
+		update diskdriverinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="mediaType != null">
+				mediaType=#{mediaType,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null">
+				model=#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				serialNumber=#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="signature !=null">
+				signature=#{signature,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

@@ -13,7 +13,7 @@ public class SysInfoImpl implements ISysInfo {
 	@Autowired
 	private SysInfoMapper sysInfoMapper;
 	public Integer addSysInfo(SysInfo sysInfo) throws Exception {
-		return sysInfoMapper.addSysInfo(sysInfo);
+		return sysInfoMapper.addInfoList(sysInfo);
 	}
 
 }

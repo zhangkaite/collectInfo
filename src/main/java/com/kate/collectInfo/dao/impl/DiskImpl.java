@@ -16,7 +16,7 @@ public class DiskImpl implements IDisk {
 	private DiskInfoMapper diskInfoMapper;
 	@Override
 	public Integer addInfo(List<DiskInfo> ls) throws Exception {
-		return diskInfoMapper.addDiskInfoList(ls);
+		return diskInfoMapper.addInfoList(ls);
 	}
 
 }

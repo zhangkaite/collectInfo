@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.OsInfoMapper">
+	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.OsInfo">
+		select * from osinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR}
+		
+	</select>
+
+	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.OsInfo">
+		insert into osinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="caption != null">
+				caption,
+			</if>
+			<if test="osArchitecture != null">
+				osArchitecture,
+			</if>
+			<if test="installDate !=null">
+				installDate,
+			</if>
+			<if test="name !=null">
+				name,
+			</if>
+			<if test="organization !=null">
+				organization,
+			</if>
+			<if test="version !=null">
+				version,
+			</if>
+			<if test="serialNumber !=null">
+				serialNumber,
+			</if>
+			
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="caption != null">
+				#{caption,jdbcType=VARCHAR},
+			</if>
+			<if test="osArchitecture != null">
+				#{osArchitecture,jdbcType=VARCHAR},
+			</if>
+			<if test="installDate !=null">
+				#{installDate,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="organization !=null">
+				#{organization,jdbcType=VARCHAR},
+			</if>
+			<if test="version !=null">
+				#{version,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey" parameterType="com.kate.collectInfo.service.entity.OsInfo">
+		update osinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="caption != null">
+				caption=#{caption,jdbcType=VARCHAR},
+			</if>
+			<if test="osArchitecture != null">
+				osArchitecture=#{osArchitecture,jdbcType=VARCHAR},
+			</if>
+			<if test="installDate !=null">
+				installDate=#{installDate,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null">
+				name=#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="organization !=null">
+				organization=#{organization,jdbcType=VARCHAR},
+			</if>
+			<if test="version !=null">
+				version=#{version,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				serialNumber=#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>

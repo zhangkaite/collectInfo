@@ -10,12 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.kate.collectInfo.service.entity.BiosInfo;
+import com.kate.collectInfo.service.entity.DiskDriverInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
+import com.kate.collectInfo.service.entity.OsInfo;
 import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
 import com.kate.collectInfo.service.entity.SoundInfo;
-import com.kate.collectInfo.tools.JsonUtil;
 import com.kate.collectInfo.tools.RumCmdUtil;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -25,7 +26,8 @@ public class WmicService {
 
 	public static List<NicInfo> getNicInfoList() {
 		List<NicInfo> dataList = new ArrayList<NicInfo>();
-		String[] command = { "cmd", "/C", "wmic nic get AdapterType,DeviceID,MACAddress,Name,ServiceName,Speed /value"};
+		String[] command = { "cmd", "/C",
+				"wmic nic get AdapterType,DeviceID,MACAddress,Name,ServiceName,Speed /value" };
 		try {
 			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 6);
 			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
@@ -42,7 +44,7 @@ public class WmicService {
 				nicInfo.setUpdateTime(new Date());
 				dataList.add(nicInfo);
 			}
-			
+
 		} catch (Exception e) {
 			logger.error("获取网卡信息失败，失败的原因是:", e);
 		}
@@ -51,7 +53,8 @@ public class WmicService {
 
 	public static List<ProcessInfo> getProcessInfoList() {
 		List<ProcessInfo> dataList = new ArrayList<ProcessInfo>();
-		String[] command = { "cmd", "/C", "wmic process get CreationClassName,CSName,ExecutablePath,Name,OSName, ProcessId,SessionId,ThreadCount,VirtualSize,WindowsVersion,WorkingSetSize /value"};
+		String[] command = { "cmd", "/C",
+				"wmic process get CreationClassName,CSName,ExecutablePath,Name,OSName, ProcessId,SessionId,ThreadCount,VirtualSize,WindowsVersion,WorkingSetSize /value" };
 		try {
 			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 11);
 			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
@@ -59,22 +62,26 @@ public class WmicService {
 				ProcessInfo processInfo = new ProcessInfo();
 				processInfo.setIp(SigarService.getDefaultIpAddress());
 				processInfo.setMac(SigarService.getMAC());
-				processInfo.setCreationClassName(map.get("CreationClassName") != null ? map.get("CreationClassName").toString() : "");
+				processInfo.setCreationClassName(
+						map.get("CreationClassName") != null ? map.get("CreationClassName").toString() : "");
 				processInfo.setCSName(map.get("CSName") != null ? map.get("CSName").toString() : "");
-				processInfo.setExecutablePath(map.get("ExecutablePath") != null ? map.get("ExecutablePath").toString() : "");
+				processInfo.setExecutablePath(
+						map.get("ExecutablePath") != null ? map.get("ExecutablePath").toString() : "");
 				processInfo.setName(map.get("Name") != null ? map.get("Name").toString() : "");
 				processInfo.setOSName(map.get("OSName") != null ? map.get("OSName").toString() : "");
 				processInfo.setProcessId(map.get("ProcessId") != null ? map.get("ProcessId").toString() : "");
 				processInfo.setSessionId(map.get("SessionId") != null ? map.get("SessionId").toString() : "");
 				processInfo.setThreadCount(map.get("ThreadCount") != null ? map.get("ThreadCount").toString() : "");
 				processInfo.setVirtualSize(map.get("VirtualSize") != null ? map.get("VirtualSize").toString() : "");
-				processInfo.setWindowsVersion(map.get("WindowsVersion") != null ? map.get("WindowsVersion").toString() : "");
-				processInfo.setWorkingSetSize(map.get("WorkingSetSize") != null ? map.get("WorkingSetSize").toString() : "");
+				processInfo.setWindowsVersion(
+						map.get("WindowsVersion") != null ? map.get("WindowsVersion").toString() : "");
+				processInfo.setWorkingSetSize(
+						map.get("WorkingSetSize") != null ? map.get("WorkingSetSize").toString() : "");
 				processInfo.setUpdateTime(new Date());
-			//	processInfo.setCpuRatioForWindows(RumCmdUtil.getCpuRatioForWindows(map.get("Name") != null ? map.get("Name").toString() : ""));
+				// processInfo.setCpuRatioForWindows(RumCmdUtil.getCpuRatioForWindows(map.get("Name")
+				// != null ? map.get("Name").toString() : ""));
 				dataList.add(processInfo);
 			}
-		
 
 		} catch (Exception e) {
 			logger.error("获取进程信息失败，失败的原因是:", e);
@@ -84,7 +91,8 @@ public class WmicService {
 
 	public static List<ServiceInfo> getServiceInfoList() {
 		List<ServiceInfo> dataList = new ArrayList<ServiceInfo>();
-		String[] command = { "cmd", "/C", "wmic SERVICE get Description,Name,StartMode,State,ProcessId,PathName /value" };
+		String[] command = { "cmd", "/C",
+				"wmic SERVICE get Description,Name,StartMode,State,ProcessId,PathName /value" };
 		try {
 			List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 6);
 			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
@@ -134,7 +142,7 @@ public class WmicService {
 
 	}
 
-	public static List<BiosInfo> getBiosInfo(){
+	public static List<BiosInfo> getBiosInfo() {
 		List<BiosInfo> dataList = new ArrayList<BiosInfo>();
 		String[] command = { "cmd", "/C", "wmic bios get Name, Manufacturer,BIOSVersion /value" };
 		try {
@@ -154,11 +162,9 @@ public class WmicService {
 			logger.error("获取BIOS信息失败，失败的原因是:", e);
 		}
 		return dataList;
-		
+
 	}
-	
-	
-	
+
 	public static List<PortInfo> getPortInfoList() {
 		List<PortInfo> dataList = new ArrayList<PortInfo>();
 		String command = "Netstat -ano";
@@ -175,16 +181,17 @@ public class WmicService {
 					portInfo.setLocalAddress(datas[2]);
 					portInfo.setStatu(datas[4]);
 					portInfo.setPid(datas[5]);
-					Map resultMap=RumCmdUtil.getTaskDetail(Integer.valueOf(datas[5]));
-					if (null!=resultMap&&resultMap.size()>0) {
-						portInfo.setName(resultMap.get("Name")==null?"":resultMap.get("Name").toString());	
-						portInfo.setExecutablePath(resultMap.get("ExecutablePath")==null?"":resultMap.get("ExecutablePath").toString());
-						
+					Map resultMap = RumCmdUtil.getTaskDetail(Integer.valueOf(datas[5]));
+					if (null != resultMap && resultMap.size() > 0) {
+						portInfo.setName(resultMap.get("Name") == null ? "" : resultMap.get("Name").toString());
+						portInfo.setExecutablePath(resultMap.get("ExecutablePath") == null ? ""
+								: resultMap.get("ExecutablePath").toString());
+
 					}
 					portInfo.setUpdateTime(new Date());
 					dataList.add(portInfo);
 				}
-			
+
 			}
 		} catch (Exception e) {
 			logger.error("获取服务列表失败，失败的原因是:", e);
@@ -192,10 +199,54 @@ public class WmicService {
 		return dataList;
 
 	}
+	
+	public static List<DiskDriverInfo> getDiskDriverInfoList() throws Exception{
+		List<DiskDriverInfo> dataList=new ArrayList<DiskDriverInfo>();
+		String[] command={ "cmd", "/C","wmic diskdrive get serialnumber,mediatype,model,signature /value"};
+		List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 4);
+		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			Map<String, Object> map = (Map<String, Object>) iterator.next();
+			DiskDriverInfo diskDriverInfo=new DiskDriverInfo();
+			diskDriverInfo.setIp(SigarService.getDefaultIpAddress());
+			diskDriverInfo.setMac(SigarService.getMAC());
+			diskDriverInfo.setMediaType(map.get("MediaType") != null ? map.get("MediaType").toString() : "");
+			diskDriverInfo.setModel(map.get("Model") != null ? map.get("Model").toString() : "");
+			diskDriverInfo.setSerialNumber(map.get("SerialNumber") != null ? map.get("SerialNumber").toString() : "");
+			diskDriverInfo.setSignature(map.get("Signature") != null ? map.get("Signature").toString() : "");
+			diskDriverInfo.setUpdateTime(new Date());
+			dataList.add(diskDriverInfo);
+		}
+		return dataList;
+	}
+	
+	public static List<OsInfo> getOsInfoList() throws Exception{
+		List<OsInfo> dataList=new ArrayList<OsInfo>();
+		String[] command={ "cmd", "/C","wmic os get Caption,OSArchitecture,InstallDate,Name,Organization,Version,SerialNumber /value"};
+		List<Map<String, Object>> list = RumCmdUtil.getAllResult(command, 7);
+		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			Map<String, Object> map = (Map<String, Object>) iterator.next();
+			OsInfo osInfo=new OsInfo();
+			osInfo.setIp(SigarService.getDefaultIpAddress());
+			osInfo.setMac(SigarService.getMAC());
+			osInfo.setCaption(map.get("Caption") != null ? map.get("Caption").toString() : "");
+			osInfo.setOsArchitecture(map.get("OSArchitecture") != null ? map.get("OSArchitecture").toString() : "");
+			osInfo.setInstallDate(map.get("InstallDate") != null ? map.get("InstallDate").toString() : "");
+			osInfo.setName(map.get("Name") != null ? map.get("Name").toString() : "");
+			osInfo.setOrganization(map.get("Organization") != null ? map.get("Organization").toString() : "");
+			osInfo.setVersion(map.get("Version") != null ? map.get("Version").toString() : "");
+			osInfo.setSerialNumber(map.get("SerialNumber") != null ? map.get("SerialNumber").toString() : "");
+			dataList.add(osInfo);
+		}
+		return dataList;
+	}
+	
+	
 
-	/*public static void main(String[] args) throws Exception {
-		WmicService WmicService = new WmicService();
-		System.out.println(JsonUtil.getObjectToJson(WmicService.getPortInfoList()));
-	}*/
+	/*
+	 * public static void main(String[] args) throws Exception { WmicService
+	 * WmicService = new WmicService();
+	 * System.out.println(JsonUtil.getObjectToJson(WmicService.getPortInfoList()
+	 * )); }
+	 */
 
 }

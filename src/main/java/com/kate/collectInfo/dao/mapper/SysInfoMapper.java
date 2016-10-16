@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.SysInfo;
 @Component
 public class SysInfoMapper extends AbstractMapper<SysInfo> {
 
-	public Integer addSysInfo(SysInfo sysInfo) throws Exception {
+	public Integer addInfoList(SysInfo sysInfo) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.SysInfoMapper");
 		SysInfo isExit = queryData(sysInfo);
 		Integer result = null;

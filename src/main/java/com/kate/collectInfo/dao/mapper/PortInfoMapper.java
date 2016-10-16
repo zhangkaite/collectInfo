@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.PortInfo;
 
 @Component
 public class PortInfoMapper extends AbstractMapper<PortInfo> {
-	public Integer addNetInfoList(List<PortInfo> dataList) throws Exception {
+	public Integer addInfoList(List<PortInfo> dataList) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.PortInfoMapper");
 		for (PortInfo portInfo : dataList) {
 			PortInfo isExit = queryData(portInfo);

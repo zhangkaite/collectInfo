@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.BiosInfo;
 
 @Component
 public class BiosInfoMapper extends AbstractMapper<BiosInfo> {
-	public Integer addNetInfoList(List<BiosInfo> dataList) throws Exception {
+	public Integer addInfoList(List<BiosInfo> dataList) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.BiosInfoMapper");
 		for (BiosInfo biosInfo : dataList) {
 			BiosInfo isExit = queryData(biosInfo);

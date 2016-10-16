@@ -9,7 +9,7 @@ import com.kate.collectInfo.service.entity.DiskInfo;
 
 @Component
 public class DiskInfoMapper extends AbstractMapper<DiskInfo> {
-	public Integer addDiskInfoList(List<DiskInfo> dataList) throws Exception {
+	public Integer addInfoList(List<DiskInfo> dataList) throws Exception {
 		setMapperPack("com.kate.collectInfo.dao.mapper.DiskInfoMapper");
 		for (DiskInfo diskInfo : dataList) {
 			DiskInfo isExit = queryData(diskInfo);

@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.kate.collectInfo.dao.interfaces.IService;
 import com.kate.collectInfo.dao.mapper.BiosInfoMapper;
+import com.kate.collectInfo.dao.mapper.DiskDriverMapper;
 import com.kate.collectInfo.dao.mapper.NicInfoMapper;
+import com.kate.collectInfo.dao.mapper.OsInfoMapper;
 import com.kate.collectInfo.dao.mapper.PortInfoMapper;
 import com.kate.collectInfo.dao.mapper.ProcessInfoMapper;
 import com.kate.collectInfo.dao.mapper.ServiceInfoMapper;
 import com.kate.collectInfo.dao.mapper.SoundInfoMapper;
 import com.kate.collectInfo.service.entity.BiosInfo;
+import com.kate.collectInfo.service.entity.DiskDriverInfo;
 import com.kate.collectInfo.service.entity.NicInfo;
+import com.kate.collectInfo.service.entity.OsInfo;
 import com.kate.collectInfo.service.entity.PortInfo;
 import com.kate.collectInfo.service.entity.ProcessInfo;
 import com.kate.collectInfo.service.entity.ServiceInfo;
@@ -33,9 +37,13 @@ public class ServiceImpl implements IService {
 	private BiosInfoMapper biosInfoMapper;
 	@Autowired
 	private PortInfoMapper portInfoMapper;
+	@Autowired
+	private DiskDriverMapper diskDriverMapper;
+	@Autowired
+	private OsInfoMapper osInfoMapper;
 	@Override
 	public Integer addNicInfo(List<NicInfo> netInfo) throws Exception {
-		return nicInfoMapper.addNetInfoList(netInfo);
+		return nicInfoMapper.addInfoList(netInfo);
 	}
 
 	@Override
@@ -55,12 +63,22 @@ public class ServiceImpl implements IService {
 
 	@Override
 	public Integer addBiosInfo(List<BiosInfo> netInfo) throws Exception {
-		return biosInfoMapper.addNetInfoList(netInfo);
+		return biosInfoMapper.addInfoList(netInfo);
 	}
 
 	@Override
 	public Integer addPortInfo(List<PortInfo> portInfoList) throws Exception {
-		return portInfoMapper.addNetInfoList(portInfoList);
+		return portInfoMapper.addInfoList(portInfoList);
+	}
+
+	@Override
+	public Integer addDiskDriverInfo(List<DiskDriverInfo> ls) throws Exception {
+		return diskDriverMapper.addInfoList(ls);
+	}
+
+	@Override
+	public Integer addOsinfo(List<OsInfo> ls) throws Exception {
+		return osInfoMapper.addInfoList(ls);
 	}
 
 }

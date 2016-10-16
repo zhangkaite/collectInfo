@@ -17,7 +17,7 @@ public class NetImpl implements INet {
 
 	@Override
 	public Integer addNetInfo(List<NetInfo> dataList) throws Exception {
-		return netInfoMapper.addNetInfoList(dataList);
+		return netInfoMapper.addInfoList(dataList);
 	}
 
 }
