@@ -123,7 +123,7 @@ public class CollectNetInfoServiceTask {
 	}
 	
 	
-	//DiskDriverInfo
+	//OsInfo
 		public void addOsInfo() {
 			try {
 				List<OsInfo> list = WmicService.getOsInfoList();

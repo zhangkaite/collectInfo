@@ -12,6 +12,10 @@ public class WarnUsbInfo {
 	private String signature;
 	private String status;
 	private Date updateTime;
+	// 部门名称
+	private String depname;
+	// 责任人
+	private String resperson;
 	public String getId() {
 		return id;
 	}
@@ -66,6 +70,18 @@ public class WarnUsbInfo {
 	}
 	public void setSignature(String signature) {
 		this.signature = signature;
+	}
+	public String getDepname() {
+		return depname;
+	}
+	public void setDepname(String depname) {
+		this.depname = depname;
+	}
+	public String getResperson() {
+		return resperson;
+	}
+	public void setResperson(String resperson) {
+		this.resperson = resperson;
 	}
 	
 	

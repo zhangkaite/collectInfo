@@ -20,6 +20,7 @@ public class OsInfoMapper extends AbstractMapper<OsInfo>{
 				} else {
 					osinfo.setUpdateTime(new Date());
 					addData(osinfo);
+					//添加预警  
 				}
 
 			}

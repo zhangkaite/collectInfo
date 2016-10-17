@@ -3,7 +3,7 @@ package com.kate.collectInfo.dao.mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+@SuppressWarnings({"hiding","unused"})
 public abstract class AbstractMapper<T> {
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -17,6 +17,7 @@ public abstract class AbstractMapper<T> {
 		this.mapperPack = mapperPack;
 	}
 
+	
 	public <T> T queryData(T data) throws Exception {
 		SqlSession sqlSession = null;
 		T result = null;
@@ -36,6 +37,7 @@ public abstract class AbstractMapper<T> {
 		return result;
 	}
 
+	
 	public <T> Integer addData(T data) throws Exception {
 		SqlSession sqlSession = null;
 		Integer result = null;
