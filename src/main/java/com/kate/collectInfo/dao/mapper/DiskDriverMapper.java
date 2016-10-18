@@ -34,13 +34,11 @@ public class DiskDriverMapper extends AbstractMapper<DiskDriverInfo> {
 				// 如果有查询的数据不存在，则说明数据为新增或者修改
 				// 如果为新增，查询u盘过滤配置中是否存在该序列号，不存在则预警
 				if (null == isExit) {
-					diskDriverInfo.setUpdateTime(new Date());
-					addData(diskDriverInfo);
 					Map dataMap = new HashMap();
 					dataMap.put("serialNumber", diskDriverInfo.getSerialNumber());
 					int number = usbFilterMapper.isDataExit(dataMap);
-					// 如果在预警配置中查询不到，则预警
-					if (number == 0) {
+					// usb 预警 如果在预警配置中查询不到，则预警
+					if (number == 0&&diskDriverInfo.getMediaType().startsWith("Removable")) {
 						WarnUsbInfo warnUsbInfo = new WarnUsbInfo();
 						warnUsbInfo.setIp(diskDriverInfo.getIp());
 						warnUsbInfo.setMac(diskDriverInfo.getMac());
@@ -50,16 +48,18 @@ public class DiskDriverMapper extends AbstractMapper<DiskDriverInfo> {
 						warnUsbInfo.setSignature(diskDriverInfo.getSignature());
 						warnUsbInfo.setStatus("0");
 						warnUsbInfo.setUpdateTime(new Date());
+						warnUsbInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnUsbInfoMapper");
 						warnUsbInfoMapper.addData(warnUsbInfo);
 					}
 					
-					//预警修改
-					DiskDriverInfo isHostExit = queryData(diskDriverInfo,"selectByIpMac");
+					//台帐预警  
+					List<DiskDriverInfo> isHostExit = queryDataList(diskDriverInfo,"selectByIpMac");
 					OsInfo osinfo=new OsInfo();
 					osinfo.setIp(diskDriverInfo.getIp());
 					osinfo.setMac(diskDriverInfo.getMac());
-					OsInfo osData=osInfoMapper.queryData(osinfo);
-					if (null==isHostExit) {
+					osInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.OsInfoMapper");
+					OsInfo osData=osInfoMapper.queryData(osinfo,"selectIpMac");
+					if (isHostExit.size()==0) {
 						//预警新增
 						WarnComputerInfo warnComputerInfo=new WarnComputerInfo();
 						warnComputerInfo.setIp(diskDriverInfo.getIp());
@@ -68,11 +68,25 @@ public class DiskDriverMapper extends AbstractMapper<DiskDriverInfo> {
 						warnComputerInfo.setOs(osData.getCaption());
 						warnComputerInfo.setStatus("新增");
 						warnComputerInfo.setUpdateTime(new Date());
+						warnCompInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnCompInfoMapper");
 						warnCompInfoMapper.addData(warnComputerInfo);
 					}else{
 						//预警磁盘序列号发生改变
-						
+						WarnComputerInfo warnComputerInfo=new WarnComputerInfo();
+						warnComputerInfo.setIp(diskDriverInfo.getIp());
+						warnComputerInfo.setMac(diskDriverInfo.getMac());
+						warnComputerInfo.setSerialNumber(diskDriverInfo.getSerialNumber());
+						warnComputerInfo.setOs(osData.getCaption());
+						warnComputerInfo.setStatus("变更");
+						warnComputerInfo.setUpdateTime(new Date());
+						warnComputerInfo.setChangeField("serialNumber");
+						warnCompInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnCompInfoMapper");
+						warnCompInfoMapper.addData(warnComputerInfo);
 					}
+					
+				   //将磁盘采集的信息持久化到数据库
+					diskDriverInfo.setUpdateTime(new Date());
+					addData(diskDriverInfo);
 				}
 
 			}

@@ -2,8 +2,8 @@ package com.kate.collectInfo.dao.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.kate.collectInfo.service.entity.WarnUsbInfo;
+import com.kate.collectInfo.service.entity.WarnComputerInfo;
 @Component
-public class WarnCompInfoMapper extends AbstractMapper<WarnUsbInfo>{
+public class WarnCompInfoMapper extends AbstractMapper<WarnComputerInfo>{
 
 }

@@ -7,13 +7,13 @@ import java.util.Date;
  *
  */
 public class WarnComputerInfo {
-
 	private String id;
 	private String ip;
 	private String mac;
 	private String serialNumber;
 	private String os;
 	private String status;
+	private String changeField;
 	private Date updateTime;
 
 	public String getId() {
@@ -38,6 +38,14 @@ public class WarnComputerInfo {
 
 	public void setMac(String mac) {
 		this.mac = mac;
+	}
+
+	public String getChangeField() {
+		return changeField;
+	}
+
+	public void setChangeField(String changeField) {
+		this.changeField = changeField;
 	}
 
 	public String getSerialNumber() {

@@ -6,7 +6,14 @@
 	<select id="selectOne" resultType="com.kate.collectInfo.service.entity.OsInfo">
 		select * from osinfo where
 		mac=#{mac,jdbcType=VARCHAR} and
-		ip=#{ip,jdbcType=VARCHAR}
+		ip=#{ip,jdbcType=VARCHAR} and caption=#{caption,jdbcType=VARCHAR}
+		
+	</select>
+	
+	<select id="selectIpMac" resultType="com.kate.collectInfo.service.entity.OsInfo">
+		select * from osinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} 
 		
 	</select>
 

@@ -1,5 +1,7 @@
 package com.kate.collectInfo.dao.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,23 @@ public abstract class AbstractMapper<T> {
 		this.mapperPack = mapperPack;
 	}
 
+	public  List<T>  queryDataList(T data,String keyName) throws Exception{
+		SqlSession sqlSession = null;
+		List<T> result = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.selectList(mapperPack + "."+keyName, data);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (null != sqlSession) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+	
+	
 	
 	public <T> T queryData(T data) throws Exception {
 		SqlSession sqlSession = null;
@@ -43,7 +62,7 @@ public abstract class AbstractMapper<T> {
 		T result = null;
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			result = sqlSession.selectOne(mapperPack + kegName, data);
+			result = sqlSession.selectOne(mapperPack +"."+ kegName, data);
 		} catch (Exception e) {
 			throw e;
 
@@ -85,7 +104,7 @@ public abstract class AbstractMapper<T> {
 		Integer result = null;
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			result = sqlSession.insert(mapperPack + keyName, data);
+			result = sqlSession.insert(mapperPack +"."+ keyName, data);
 			if (result != null) {
 				return result;
 			}
@@ -127,7 +146,7 @@ public abstract class AbstractMapper<T> {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
 			// cpuInfo.setUpdateTime(new Date());
-			Integer result = sqlSession.update(mapperPack + keyName, t);
+			Integer result = sqlSession.update(mapperPack +"."+ keyName, t);
 			if (result != null) {
 				return result;
 			}

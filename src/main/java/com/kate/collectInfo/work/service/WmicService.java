@@ -211,7 +211,7 @@ public class WmicService {
 			diskDriverInfo.setMac(SigarService.getMAC());
 			diskDriverInfo.setMediaType(map.get("MediaType") != null ? map.get("MediaType").toString() : "");
 			diskDriverInfo.setModel(map.get("Model") != null ? map.get("Model").toString() : "");
-			diskDriverInfo.setSerialNumber(map.get("SerialNumber") != null ? map.get("SerialNumber").toString() : "");
+			diskDriverInfo.setSerialNumber(map.get("SerialNumber") != null ? map.get("SerialNumber").toString().trim() : "");
 			diskDriverInfo.setSignature(map.get("Signature") != null ? map.get("Signature").toString() : "");
 			diskDriverInfo.setUpdateTime(new Date());
 			dataList.add(diskDriverInfo);

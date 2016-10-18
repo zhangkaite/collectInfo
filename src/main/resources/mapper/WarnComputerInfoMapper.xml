@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kate.collectInfo.dao.mapper.WarnCompInfoMapper">
+	<select id="selectOne"
+		resultType="com.kate.collectInfo.service.entity.WarnComputerInfo">
+		select * from warncomputerinfo
+		where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="insertData"
+		parameterType="com.kate.collectInfo.service.entity.WarnComputerInfo">
+		insert into warncomputerinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="serialNumber != null">
+				serialNumber,
+			</if>
+			<if test="os != null">
+				os,
+			</if>
+			<if test="status !=null">
+				status,
+			</if>
+			<if test="changeField !=null">
+				changeField,
+			</if>
+			<if test="updateTime !=null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="os !=null">
+				#{os,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="changeField !=null">
+				#{changeField,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByKey"
+		parameterType="com.kate.collectInfo.service.entity.WarnComputerInfo">
+		update warncomputerinfo
+		<set>
+			<if test="ip != null">
+				ip=#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac=#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNumber !=null">
+				serialNumber=#{serialNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="os !=null">
+				os=#{os,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null">
+				status= #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="changeField !=null">
+				changeField= #{changeField,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime!=null">
+				updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+</mapper>
