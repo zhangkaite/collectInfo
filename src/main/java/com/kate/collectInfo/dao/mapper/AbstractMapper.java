@@ -38,6 +38,26 @@ public abstract class AbstractMapper<T> {
 	}
 
 	
+	public <T> T queryData(T data,String kegName) throws Exception {
+		SqlSession sqlSession = null;
+		T result = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.selectOne(mapperPack + kegName, data);
+		} catch (Exception e) {
+			throw e;
+
+		} finally {
+			if (null != sqlSession) {
+				sqlSession.close();
+			}
+
+		}
+
+		return result;
+	}
+	
+	
 	public <T> Integer addData(T data) throws Exception {
 		SqlSession sqlSession = null;
 		Integer result = null;
@@ -59,6 +79,29 @@ public abstract class AbstractMapper<T> {
 		return result;
 	}
 
+	
+	public <T> Integer addData(T data,String keyName) throws Exception {
+		SqlSession sqlSession = null;
+		Integer result = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.insert(mapperPack + keyName, data);
+			if (result != null) {
+				return result;
+			}
+		} catch (Exception e) {
+			throw e;
+
+		} finally {
+			if (null != sqlSession) {
+				sqlSession.close();
+			}
+
+		}
+		return result;
+	}
+
+	
 	public Integer updataData(T t) throws Exception {
 		SqlSession sqlSession = null;
 		try {
@@ -78,4 +121,26 @@ public abstract class AbstractMapper<T> {
 		}
 		return 0;
 	}
+	
+	public Integer updataData(T t,String keyName) throws Exception {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			// cpuInfo.setUpdateTime(new Date());
+			Integer result = sqlSession.update(mapperPack + keyName, t);
+			if (result != null) {
+				return result;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (null != sqlSession) {
+				sqlSession.close();
+			}
+
+		}
+		return 0;
+	}
+	
+	
 }

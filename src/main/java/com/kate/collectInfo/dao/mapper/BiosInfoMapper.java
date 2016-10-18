@@ -14,10 +14,7 @@ public class BiosInfoMapper extends AbstractMapper<BiosInfo> {
 		for (BiosInfo biosInfo : dataList) {
 			BiosInfo isExit = queryData(biosInfo);
 			biosInfo.setUpdateTime(new Date());
-			if (null != isExit) {
-				biosInfo.setId(isExit.getId());
-				updataData(biosInfo);
-			} else {
+			if (null == isExit){
 				addData(biosInfo);
 			}
 		}

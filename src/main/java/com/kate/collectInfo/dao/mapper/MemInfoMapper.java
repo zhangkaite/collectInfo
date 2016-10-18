@@ -16,10 +16,7 @@ public class MemInfoMapper extends AbstractMapper<MemInfo> {
 		memInfo.setUpdateTime(new Date());
 		if (null == isExit) {
 			result = addData(memInfo);
-		} else {
-			memInfo.setId(isExit.getIp());
-			result = updataData(memInfo);
-		}
+		} 
 		return result;
 	}
 

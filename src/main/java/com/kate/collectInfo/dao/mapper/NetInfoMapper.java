@@ -14,10 +14,7 @@ public class NetInfoMapper extends AbstractMapper<NetInfo> {
 		for (NetInfo netInfo : dataList) {
 			NetInfo isExit = queryData(netInfo);
 			netInfo.setUpdateTime(new Date());
-			if (null != isExit) {
-				netInfo.setId(isExit.getId());
-				updataData(netInfo);
-			} else {
+			if (null == isExit) {
 				addData(netInfo);
 			}
 		}

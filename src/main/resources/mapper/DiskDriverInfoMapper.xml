@@ -10,6 +10,12 @@
 		serialNumber=#{serialNumber,jdbcType=VARCHAR}
 	</select>
 
+	<select id="selectByIpMac" resultType="com.kate.collectInfo.service.entity.DiskDriverInfo">
+		select * from diskdriverinfo where
+		mac=#{mac,jdbcType=VARCHAR} and
+		ip=#{ip,jdbcType=VARCHAR} 
+	</select>
+	
 	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.DiskDriverInfo">
 		insert into diskdriverinfo
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -31,7 +37,7 @@
 			<if test="signature !=null">
 				signature,
 			</if>
-			
+
 			<if test="updateTime !=null">
 				updateTime,
 			</if>
@@ -55,7 +61,7 @@
 			<if test="signature !=null">
 				#{signature,jdbcType=VARCHAR},
 			</if>
-			
+
 			<if test="updateTime!=null">
 				#{updateTime,jdbcType=TIMESTAMP},
 			</if>

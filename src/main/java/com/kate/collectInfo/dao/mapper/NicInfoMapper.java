@@ -14,10 +14,7 @@ public class NicInfoMapper extends AbstractMapper<NicInfo> {
 		for (NicInfo nicInfo : dataList) {
 			NicInfo isExit = queryData(nicInfo);
 			nicInfo.setUpdateTime(new Date());
-			if (null != isExit) {
-				nicInfo.setId(isExit.getId());
-				updataData(nicInfo);
-			} else {
+			if (null == isExit) {
 				addData(nicInfo);
 			}
 		}

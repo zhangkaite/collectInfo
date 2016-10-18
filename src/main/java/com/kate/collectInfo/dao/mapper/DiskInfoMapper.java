@@ -14,10 +14,7 @@ public class DiskInfoMapper extends AbstractMapper<DiskInfo> {
 		for (DiskInfo diskInfo : dataList) {
 			DiskInfo isExit = queryData(diskInfo);
 			diskInfo.setUpdateTime(new Date());
-			if (null != isExit) {
-				diskInfo.setId(isExit.getId());
-				updataData(diskInfo);
-			} else {
+			if (null == isExit) {
 				addData(diskInfo);
 			}
 		}
