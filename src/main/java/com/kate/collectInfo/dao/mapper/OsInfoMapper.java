@@ -38,10 +38,10 @@ public class OsInfoMapper extends AbstractMapper<OsInfo> {
 					warnComputerInfo.setIp(osinfo.getIp());
 					warnComputerInfo.setMac(osinfo.getMac());
 					warnComputerInfo.setSerialNumber(diskDriverInfo.getSerialNumber());
-					warnComputerInfo.setOs(osinfo.getCaption());
+					warnComputerInfo.setOs(osinfo.getVersion());
 					warnComputerInfo.setStatus("变更");
 					warnComputerInfo.setUpdateTime(new Date());
-					warnComputerInfo.setChangeField("os");
+					warnComputerInfo.setChangeField("操作系统版本号");
 					warnCompInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnCompInfoMapper");
 					warnCompInfoMapper.addData(warnComputerInfo);
 				}

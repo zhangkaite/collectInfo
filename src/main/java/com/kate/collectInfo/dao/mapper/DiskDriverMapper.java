@@ -65,9 +65,10 @@ public class DiskDriverMapper extends AbstractMapper<DiskDriverInfo> {
 						warnComputerInfo.setIp(diskDriverInfo.getIp());
 						warnComputerInfo.setMac(diskDriverInfo.getMac());
 						warnComputerInfo.setSerialNumber(diskDriverInfo.getSerialNumber());
-						warnComputerInfo.setOs(osData.getCaption());
+						warnComputerInfo.setOs(osData.getVersion());
 						warnComputerInfo.setStatus("新增");
 						warnComputerInfo.setUpdateTime(new Date());
+						warnComputerInfo.setChangeField("无变更");
 						warnCompInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnCompInfoMapper");
 						warnCompInfoMapper.addData(warnComputerInfo);
 					}else{
@@ -76,10 +77,10 @@ public class DiskDriverMapper extends AbstractMapper<DiskDriverInfo> {
 						warnComputerInfo.setIp(diskDriverInfo.getIp());
 						warnComputerInfo.setMac(diskDriverInfo.getMac());
 						warnComputerInfo.setSerialNumber(diskDriverInfo.getSerialNumber());
-						warnComputerInfo.setOs(osData.getCaption());
+						warnComputerInfo.setOs(osData.getVersion());
 						warnComputerInfo.setStatus("变更");
 						warnComputerInfo.setUpdateTime(new Date());
-						warnComputerInfo.setChangeField("serialNumber");
+						warnComputerInfo.setChangeField("磁盘序列号");
 						warnCompInfoMapper.setMapperPack("com.kate.collectInfo.dao.mapper.WarnCompInfoMapper");
 						warnCompInfoMapper.addData(warnComputerInfo);
 					}
