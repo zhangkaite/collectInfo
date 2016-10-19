@@ -13,7 +13,7 @@
 	<select id="selectByIpMac" resultType="com.kate.collectInfo.service.entity.DiskDriverInfo">
 		select * from diskdriverinfo where
 		mac=#{mac,jdbcType=VARCHAR} and
-		ip=#{ip,jdbcType=VARCHAR} 
+		ip=#{ip,jdbcType=VARCHAR}  and mediaType=#{mediaType,jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="insertData" parameterType="com.kate.collectInfo.service.entity.DiskDriverInfo">
