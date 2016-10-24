@@ -48,7 +48,7 @@ public class ScheduledTasks {
 	@Scheduled(cron = "0 */1 * * * *")
 	public void sendPortInfo() {
 		try {
-			collectNetInfoServiceTask.addOsInfo();
+			//collectNetInfoServiceTask.addOsInfo();
 			collectNetInfoServiceTask.addDiskDriverInfo();
 			
 			//采集预警
@@ -61,6 +61,19 @@ public class ScheduledTasks {
 	
 	
 	
+	@Scheduled(cron = "0 */2 * * * *")
+	public void addDiskDriverInfo() {
+		try {
+			//collectNetInfoServiceTask.addOsInfo();
+			collectNetInfoServiceTask.addDiskDriverInfo();
+			
+			//采集预警
+			
+			
+		} catch (Exception e) {
+			logger.error("collectWinInfoTask work调用失败，失败的原因是:", e);
+		}
+	}
 	
 	
 	
