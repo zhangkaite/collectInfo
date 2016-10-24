@@ -30,6 +30,9 @@
 			<if test="status !=null">
 				status,
 			</if>
+			<if test="busType !=null">
+				busType,
+			</if>
 			<if test="changeField !=null">
 				changeField,
 			</if>
@@ -52,6 +55,9 @@
 			</if>
 			<if test="status !=null">
 				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="busType !=null">
+				#{busType,jdbcType=VARCHAR},
 			</if>
 			<if test="changeField !=null">
 				#{changeField,jdbcType=VARCHAR},
@@ -79,6 +85,9 @@
 			</if>
 			<if test="status !=null">
 				status= #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="busType !=null">
+				busType= #{busType,jdbcType=VARCHAR},
 			</if>
 			<if test="changeField !=null">
 				changeField= #{changeField,jdbcType=VARCHAR},

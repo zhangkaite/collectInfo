@@ -12,6 +12,7 @@ public class WarnComputerInfo {
 	private String mac;
 	private String serialNumber;
 	private String os;
+	private String busType;
 	private String status;
 	private String changeField;
 	private Date updateTime;
@@ -54,6 +55,14 @@ public class WarnComputerInfo {
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+
+	public String getBusType() {
+		return busType;
+	}
+
+	public void setBusType(String busType) {
+		this.busType = busType;
 	}
 
 	public String getOs() {

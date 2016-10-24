@@ -48,8 +48,9 @@ public class ScheduledTasks {
 	@Scheduled(cron = "0 */1 * * * *")
 	public void sendPortInfo() {
 		try {
-			collectNetInfoServiceTask.addDiskDriverInfo();
 			collectNetInfoServiceTask.addOsInfo();
+			collectNetInfoServiceTask.addDiskDriverInfo();
+			
 			//采集预警
 			
 			
