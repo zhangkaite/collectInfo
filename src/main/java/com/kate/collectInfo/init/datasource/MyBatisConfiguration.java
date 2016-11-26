@@ -46,8 +46,8 @@ public class MyBatisConfiguration {
 			comboPooledDataSource.setPassword(properties.getPassword());
 			comboPooledDataSource.setDriverClass(properties.getDriverClassName());
 			comboPooledDataSource.setJdbcUrl(properties.getUrl());
-			comboPooledDataSource.setMaxPoolSize(200);
-			comboPooledDataSource.setMinPoolSize(5);
+			comboPooledDataSource.setMaxPoolSize(10);
+			comboPooledDataSource.setMinPoolSize(1);
 			comboPooledDataSource.setCheckoutTimeout(3000);
 			comboPooledDataSource.setMaxIdleTime(3600);
 			comboPooledDataSource.setAutoCommitOnClose(true);

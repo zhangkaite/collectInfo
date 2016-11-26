@@ -26,20 +26,20 @@ public class ScheduledTasks {
    @Autowired
    private CollectNetInfoServiceTask collectNetInfoServiceTask;
  
-	@Scheduled(cron = "0 */10 * * * *")
+	@Scheduled(cron = "0 */30 * * * *")
 	public void sendHttpWinInfo() {
 		try {
 			collectCpuInfoServiceTask.addCpuInfo();
-			collectMemInfoServiceTask.addMemInfo();
-			collectOperInfoServiceTask.addInfo();
+			//collectMemInfoServiceTask.addMemInfo();
+			/*collectOperInfoServiceTask.addInfo();*/
 			collectDiskInfoServiceTask.addList();
-			collectNetInfoServiceTask.addNetInfo();
+			/*collectNetInfoServiceTask.addNetInfo();
 			collectNetInfoServiceTask.addNicInfo();
 			collectNetInfoServiceTask.addBiosInfo();
 			collectNetInfoServiceTask.addSoundListInfo();
-			collectNetInfoServiceTask.addServiceInfo();
+			collectNetInfoServiceTask.addServiceInfo();*/
 			collectNetInfoServiceTask.addProcessInfoList();
-			collectNetInfoServiceTask.addportInfo();
+			/*collectNetInfoServiceTask.addportInfo();*/
 		} catch (Exception e) {
 			logger.error("collectWinInfoTask work调用失败，失败的原因是:", e);
 		}
@@ -48,8 +48,8 @@ public class ScheduledTasks {
 	@Scheduled(cron = "0 */1 * * * *")
 	public void sendPortInfo() {
 		try {
-			//collectNetInfoServiceTask.addOsInfo();
-			collectNetInfoServiceTask.addDiskDriverInfo();
+			collectNetInfoServiceTask.addOsInfo();
+			//collectNetInfoServiceTask.addDiskDriverInfo();
 			
 			//采集预警
 			
